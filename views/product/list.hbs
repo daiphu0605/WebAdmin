@@ -1,0 +1,36 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-1">
+			<h4 class="color-edit">ID</h4>
+		</div>
+		<div class="col-lg-5">
+			<h4 class="color-edit align-edit">Name</h4>
+		</div>
+		<div class="col-lg-3">
+			<h4 class="color-edit align-edit">Author</h4>
+		</div>
+		<div class="col-lg-3">
+			<h4 class="color-edit">Price</h4>
+		</div>
+	</div>
+	<ul>
+	{{#each books}}
+		<li>
+			<div class="row">
+				<div class="col-lg-1">
+					<p class="color-edit">{{id}}</p>
+				</div>
+				<div class="col-lg-5">
+					<p class="color-edit align-edit">{{title}}</p>
+				</div>
+				<div class="col-lg-3">
+					<p class="color-edit align-edit">{{author}}</p>
+				</div>
+				<div class="col-lg-3">
+					<p class="color-edit">{{base_price}} VND</p>
+				</div>
+			</div>
+		</li>
+	{{/each}}
+	</ul>
+</div>
