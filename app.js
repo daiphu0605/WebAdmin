@@ -13,7 +13,8 @@ var signUp = require('./routes/signup');
 var addBook = require('./routes/addBook');
 
 var app = express();
-var connection=require('./models/connection')
+var connection=require('./models/connection');
+require('dotenv').config();
 //
 
 
