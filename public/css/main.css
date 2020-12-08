@@ -3026,6 +3026,13 @@ input.num-product::-webkit-inner-spin-button {
   height: 46px;
 }
 
+.size-103-edit {
+  min-width: 46px;
+  height: 46px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .size-104 {
   min-width: 94px;
   height: 40px;
