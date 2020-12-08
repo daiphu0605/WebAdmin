@@ -1,4 +1,4 @@
-
+{{!--
 <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
     <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30">
         <form class="login100-form validate-form" method="POST">
@@ -82,4 +82,91 @@
     </div>
 </div>
 
+--}}
 
+
+<div class="col-md-6 offset-md-3 mt-5">
+    <a target="_blank" href="https://getform.io?ref=codepenHTML">
+        <img src='https://i.imgur.com/Z2Nyxsm.png'>
+    </a>
+    <br>
+    <a target="_blank" href="https://getform.io?ref=codepenHTML" class="mt-3 d-flex">Getform.io | Get your free endpoint
+        now</a>
+    <h1>Getform.io HTML Form Example with File Upload</h1>
+    <form accept-charset="UTF-8" action="/addbook" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="exampleInputName">Book ID</label>
+            <input type="number" name="id" placeholder="ID" class="form-control" required="required">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1" required="required">Title</label>
+            <input type="text" name="title" placeholder="Title" class="form-control" aria-describedby="emailHelp">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1" required="required">Price</label>
+            <input type="number" name="base_price" placeholder="Price" class="form-control"
+                aria-describedby="emailHelp">
+        </div>
+
+
+
+        <div class="form-group">
+            <label for="exampleInputEmail1" required="required">ISBN</label>
+            <input type="text" name="isbn" placeholder="ISBN" class="form-control" aria-describedby="emailHelp">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1" required="required">Supplier</label>
+            <input type="text" name="supplier" placeholder="Supplier" class="form-control" aria-describedby="emailHelp">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1" required="required">Author</label>
+            <input type="text" name="author" placeholder="Author" class="form-control" aria-describedby="emailHelp">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1" required="required">Publisher</label>
+            <input type="text" name="publisher" placeholder="Publisher" class="form-control"
+                aria-describedby="emailHelp">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1" required="required">Public year</label>
+            <input type="text" name="public_year" placeholder="Public year" class="form-control"
+                aria-describedby="emailHelp">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1" required="required">Weight</label>
+            <input type="number" name="weight" placeholder="Weight" class="form-control" aria-describedby="emailHelp">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1" required="required">Size</label>
+            <input type="text" name="size" placeholder="Size" class="form-control" aria-describedby="emailHelp">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1" required="required">Number of page</label>
+            <input type="number" name="number_page" placeholder="Number of page" class="form-control"
+                aria-describedby="emailHelp">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1" required="required">Email address</label>
+            <input type="text" name="page" placeholder="Page type" class="form-control" aria-describedby="emailHelp">
+        </div>
+
+        <hr>
+
+        <div class="form-group mt-3">
+            <label class="mr-2">Upload main image:</label>
+            <input type="file" name="image">
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
