@@ -1,6 +1,28 @@
 const productService = require('../models/productService');
+var search = require('../models/search');
 
-exports.index = async (req, res, next) => {
+async function Search(req, res, next) {
+    var value = req.query.searchproduct;
+    var limit = 12;
+    var page = 1;
+    var Result = search.Search(value,page,limit);
+    Result.then((searchResult) => {
+        res.render('product/list', {layout: 'main_layout', books: searchResult, page});
+    });
+    
+}
+
+exports.ProductCon = (req, res, next) => {
+    var value = req.query.searchproduct;
+    if (value == null) {
+        index(req, res, next);
+    }
+    else {
+        Search(req, res, next);
+    }
+}
+
+async function index(req, res, next){
      //Get current page, default by 1
      const curPage = +req.query.page || 1;
 
