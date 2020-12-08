@@ -1,36 +1,285 @@
-<div class="container">
-	<div class="row">
-		<div class="col-lg-1">
-			<h4 class="color-edit">ID</h4>
-		</div>
-		<div class="col-lg-5">
-			<h4 class="color-edit align-edit">Name</h4>
-		</div>
-		<div class="col-lg-3">
-			<h4 class="color-edit align-edit">Author</h4>
-		</div>
-		<div class="col-lg-3">
-			<h4 class="color-edit">Price</h4>
-		</div>
-	</div>
-	<ul>
-	{{#each books}}
-		<li>
-			<div class="row">
-				<div class="col-lg-1">
-					<p class="color-edit">{{id}}</p>
+<!-- Product -->
+	<section class="bg0 p-t-23 p-b-140">
+		<div class="container">
+			<div class="p-b-10">
+				<h3 class="ltext-103-edit cl5">
+					Product List
+				</h3>
+			</div>
+
+			<div class="flex-w flex-sb-m p-b-52">
+				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+					{{!-- <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+						All Books
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+						Education 
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
+						Foreign Books
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
+						Language 
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
+						Novel
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
+						Business
+					</button> --}}
 				</div>
-				<div class="col-lg-5">
-					<p class="color-edit align-edit">{{title}}</p>
+
+				<div class="flex-w flex-c-m m-tb-10">
+					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+						<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+						<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+						 Filter
+					</div>
+
+					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+						<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+						Search
+					</div>
 				</div>
-				<div class="col-lg-3">
-					<p class="color-edit align-edit">{{author}}</p>
+				
+				<!-- Search product -->
+				<div class="dis-none panel-search w-full p-t-10 p-b-15">
+					<div class="bor8 dis-flex p-l-15">
+						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+							<i class="zmdi zmdi-search"></i>
+						</button>
+
+						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+					</div>	
 				</div>
-				<div class="col-lg-3">
-					<p class="color-edit">{{base_price}} VND</p>
+
+				<!-- Filter -->
+				<div class="dis-none panel-filter w-full p-t-10">
+					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+						<div class="filter-col1 p-r-15 p-b-27">
+							<div class="mtext-102 cl2 p-b-15">
+								Sort By
+							</div>
+
+							<ul>
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										Default
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										Popularity
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										Average rating
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+										Newness
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										Price: Low to High
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										Price: High to Low
+									</a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="filter-col2 p-r-15 p-b-27">
+							<div class="mtext-102 cl2 p-b-15">
+								Price
+							</div>
+
+							<ul>
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+										All
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										Under 100000 VNĐ
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										100000 - 200000 VNĐ
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										200000 - 500000 VNĐ
+									</a>
+								</li>
+
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										Above 500000 VNĐ
+									</a>
+								</li>
+							</ul>
+						</div>
+
+
+						<div class="filter-col4 p-b-27">
+							<div class="mtext-102 cl2 p-b-15">
+								Tags
+							</div>
+
+							<div class="flex-w p-t-4 m-r--5">
+								<a href="/?catogory=C01" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Novel
+								</a>
+
+								<a href="/?catogory=C02" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Foreign Book
+								</a>
+
+								<a href="/?catogory=C03" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Education
+								</a>
+
+								<a href="/?catogory=C11" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Textbook
+								</a>
+
+								<a href="/?catogory=C07" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Fiction
+								</a>
+
+								<a href="/?catogory=C08" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									History
+								</a>
+
+								<a href="/?catogory=C10" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Horror
+								</a>
+
+								<a href="/?catogory=C05" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Light Novel
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</li>
-	{{/each}}
-	</ul>
-</div>
+
+
+
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-1">
+						<h4 class="color-edit">ID</h4>
+					</div>
+					<div class="col-lg-5">
+						<h4 class="color-edit align-edit">Name</h4>
+					</div>
+					<div class="col-lg-3">
+						<h4 class="color-edit align-edit">Author</h4>
+					</div>
+					<div class="col-lg-3">
+						<h4 class="color-edit">Price</h4>
+					</div>
+				</div>
+				<ul>
+				{{#each books}}
+					<li>
+						<div class="row">
+							<div class="col-lg-1">
+								<p class="color-edit">{{id}}</p>
+							</div>
+							<div class="col-lg-5">
+								<p class="color-edit align-edit">{{title}}</p>
+							</div>
+							<div class="col-lg-3">
+								<p class="color-edit align-edit">{{author}}</p>
+							</div>
+							<div class="col-lg-3">
+								<p class="color-edit">{{base_price}} VND</p>
+							</div>
+						</div>
+					</li>
+				{{/each}}
+				</ul>
+			</div>
+
+
+			<!-- Page -->
+			<div class="flex-c-m flex-w w-full p-t-45">
+				<a href="/?page=1" class="flex-c-m stext-101 cl5 size-103-edit bg2 bor1 hov-btn1 p-lr-15 trans-04">
+					First
+				</a>
+
+				{{#if page.prevPrevPage}}
+					<a href="/?page={{page.prevPrevPage}}" class="flex-c-m stext-101 cl5 size-103-edit bg2 bor1 hov-btn1 p-lr-15 trans-04">
+						{{page.prevPrevPage}}
+					</a>
+				{{/if}}
+
+				{{#if page.prevPage}}
+					<a href="/?page={{page.prevPage}}" class="flex-c-m stext-101 cl5 size-103-edit bg2 bor1 hov-btn1 p-lr-15 trans-04">
+						{{page.prevPage}}
+					</a>
+				{{/if}}
+
+				{{#if page.currentPage}}
+					<a href="/?page={{page.currentPage}}" class="flex-c-m stext-101 cl5 size-103-edit bg2 bor1 hov-btn1 p-lr-15 trans-04">
+						{{page.currentPage}}
+					</a>
+				{{/if}}
+
+				{{#if page.nextPage}}
+					<a href="/?page={{page.nextPage}}" class="flex-c-m stext-101 cl5 size-103-edit bg2 bor1 hov-btn1 p-lr-15 trans-04">
+						{{page.nextPage}}
+					</a>
+				{{/if}}
+
+				{{#if page.nextNextPage}}
+					<a href="/?page={{page.nextNextPage}}" class="flex-c-m stext-101 cl5 size-103-edit bg2 bor1 hov-btn1 p-lr-15 trans-04">
+						{{page.nextNextPage}}
+					</a>
+				{{/if}}
+
+				<a href="/?page={{page.totalPage}}" class="flex-c-m stext-101 cl5 size-103-edit bg2 bor1 hov-btn1 p-lr-15 trans-04">
+					Last
+				</a>
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+
+
