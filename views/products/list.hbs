@@ -1,0 +1,80 @@
+<script src="assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
+<script src="assets/extra-libs/multicheck/jquery.multicheck.js"></script>
+<script src="assets/extra-libs/DataTables/datatables.min.js"></script>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Basic Datatable</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+
+                                <th scope="col">ID</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">Price</th>
+                                <th>
+                                    <label class="customcheckbox m-b-20">
+                                        <input type="checkbox" id="mainCheckbox" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="customtable">
+                            {{#each books}}
+                            <tr>
+                                <td>
+                                    {{id}}
+                                </td>
+                                <td>
+                                    {{title}}
+                                </td>
+                                <td>
+                                    {{author}}
+                                </td>
+                                <td>
+                                    {{base_price}}
+                                </td>
+                                <th>
+                                    <label class="customcheckbox">
+                                        <input type="checkbox" class="listCheckbox" name="listCheck"/>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </th>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<nav aria-label="...">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active">
+            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- this page js -->
+<!--Tham khao: https://stackoverflow.com/questions/16371678/all-checkboxes-need-to-be-checked-and-unchecked-with-the-main-checkbox -->
+<script>
+    $('input[id=mainCheckbox]').click(function () {
+        $("INPUT[name='listCheck']").prop('checked', this.checked);
+    });
+</script>

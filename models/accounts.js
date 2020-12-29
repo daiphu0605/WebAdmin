@@ -1,6 +1,5 @@
 const connection = require('./connection');
-var express = require("express");
-var router = express.Router();
+
 
 
 function Result (err, results){
@@ -8,6 +7,18 @@ function Result (err, results){
     console.log(results);
 }
 
+exports.displayAllUser=()=>{
+    var sql = "SELECT * FROM hcmus_book_store.user_info";
+    var results;
+    var err;
+    connection.query(sql,Result(err, results));
+
+    if (results != null){
+        return true;
+    }
+    return false;
+
+}
 
 exports.FindUserName = (username) => {
     var sql = "SELECT username FROM hcmus_book_store.user_info WHERE username = '"+username+"'";

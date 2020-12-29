@@ -13,7 +13,6 @@ router.post("/", upload.single("image"), async (req, res, next) => {
 
   addBook.addBook(req, res, result.url);
 
-  //res.render("./product/add_book_fin", { layout: "layout_addBook" });
 });
 
 module.exports = router;

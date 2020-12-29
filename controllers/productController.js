@@ -7,7 +7,7 @@ async function Search(req, res, next) {
     var page = 1;
     var Result = search.Search(value,page,limit);
     Result.then((searchResult) => {
-        res.render('product/list', {layout: 'main_layout', books: searchResult, page});
+        res.render('products/list', {layout: 'main_layout', books: searchResult, page});
     });
     
 }
@@ -37,7 +37,7 @@ async function index(req, res, next){
      const books = await productService.products(curPage, catID);
  
      // Pass data to view to display list of books
-     res.render('product/list', {layout: 'main_layout', books, page});
+     res.render('products/list', {layout: 'main_layout', books, page});
 };
 
 exports.book = async (req, res, next) => {
