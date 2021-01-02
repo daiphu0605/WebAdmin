@@ -6,6 +6,7 @@ const productController = require('../controllers/productController');
 
 router.get('/', productController.ProductCon);
 router.get('/create-new', productController.CreateNew);
+router.get('/delete', productController.ProductDel);
 //router.get('/:id', productController.book);
 
 module.exports = router;

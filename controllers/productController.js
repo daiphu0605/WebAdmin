@@ -12,7 +12,18 @@ async function Search(req, res, next) {
     
 }
 
+//
 exports.ProductCon = (req, res, next) => {
+    var value = req.query.searchproduct;
+    if (value == null) {
+        index(req, res, next);
+    }
+    else {
+        Search(req, res, next);
+    }
+}
+//
+exports.ProductDel = (req, res, next) => {
     var value = req.query.searchproduct;
     if (value == null) {
         index(req, res, next);

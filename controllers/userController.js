@@ -7,12 +7,22 @@ async function Search(req, res, next) {
     var page = 1;
     var Result = search.Search(value,page,limit);
     Result.then((searchResult) => {
-        res.render('products/list', {layout: 'main_layout', books: searchResult, page});
+        res.render('users/list', {layout: 'main_layout', books: searchResult, page});
     });
     
 }
 
 exports.UserCon = (req, res, next) => {
+    var value = req.query.searchproduct;
+    if (value == null) {
+        index(req, res, next);
+    }
+    else {
+        Search(req, res, next);
+    }
+}
+
+exports.UserDel = (req, res, next) => {
     var value = req.query.searchproduct;
     if (value == null) {
         index(req, res, next);
