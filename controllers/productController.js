@@ -48,3 +48,9 @@ exports.book = async (req, res, next) => {
 
     res.render('detailBook/detail', {layout: 'detaillayout', detail});
 };
+
+exports.CreateNew = async (req, res, next) => {
+    //const item = req.body.book_id;
+    // Get detailbooks from model
+    res.render('products/create_new', {layout: 'main_layout'});
+};

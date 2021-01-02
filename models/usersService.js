@@ -124,10 +124,10 @@ exports.pageNumber = async(page, catID) =>{
     return pageDetail;
 }
 
-exports.getBookByID = async(BookID) =>{
+exports.getUserByID = async(UserID) =>{
     
   var result = await new Promise ((resolve, reject) => {
-      var sql = "SELECT * FROM hcmus_book_store.book_info WHERE id = '" + BookID + "';";
+      var sql = "SELECT * FROM hcmus_book_store.user_info WHERE username = '" + UserID + "';";
       connection.query(sql,(err, temp) => {
           if (err) return reject(err);
           var result = temp[0];

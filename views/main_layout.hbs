@@ -9,22 +9,24 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png">
     <title>Matrix Template - The Ultimate Multipurpose admin template</title>
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/extra-libs/multicheck/multicheck.css">
-    <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
-    <link href="dist/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/extra-libs/multicheck/multicheck.css">
+    <link href="/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="/dist/css/style.min.css" rel="stylesheet">
+
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -58,14 +60,14 @@
                         <b class="logo-icon p-l-10">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="assets/images/logo-icon.png" alt="homepage" class="light-logo" />
+                            <img src="/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
 
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="assets/images/logo-text.png" alt="homepage" class="light-logo" />
+                            <img src="/assets/images/logo-text.png" alt="homepage" class="light-logo" />
 
                         </span>
                         <!-- Logo icon -->
@@ -219,7 +221,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                                    src="/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
                                     My Profile</a>
@@ -260,18 +262,48 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/"
                                 aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="/users" aria-expanded="false"><i class="mdi mdi-account-box"></i><span
-                                    class="hide-menu">Users</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="/products" aria-expanded="false"><i class="mdi mdi-book-multiple"></i><span
-                                    class="hide-menu">Products</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-account-box"></i><span
+                                    class="hide-menu">Users </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="/users" class="sidebar-link"><i
+                                            class="mdi mdi-all-inclusive"></i><span class="hide-menu"> View All
+                                        </span></a>
+                                </li>
+                                <li class="sidebar-item"><a href="/users/create-new" class="sidebar-link"><i
+                                            class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Create New
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="authentication-register.html" class="sidebar-link"><i
+                                            class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Delete
+                                        </span></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i
+                                    class="mdi mdi-book-multiple"></i><span class="hide-menu">Products </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="/products" class="sidebar-link"><i
+                                            class="mdi mdi-all-inclusive"></i><span class="hide-menu"> View All
+                                        </span></a>
+                                </li>
+                                <li class="sidebar-item"><a href="/products/create-new" class="sidebar-link"><i
+                                            class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Create New
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="authentication-register.html" class="sidebar-link"><i
+                                            class="mdi mdi-all-inclusive"></i><span class="hide-menu"> Delete
+                                        </span></a></li>
+                            </ul>
+                        </li>
+
+
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="tables.html" aria-expanded="false"><i class="mdi mdi-sale"></i><span
                                     class="hide-menu">Orders</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
                                 aria-expanded="false"><i class="mdi mdi-alert"></i><span
                                     class="hide-menu">Report</span></a></li>
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -336,21 +368,21 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
+    <script src="/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/assets/extra-libs/sparkline/sparkline.js"></script>
     <!--Wave Effects -->
-    <script src="dist/js/waves.js"></script>
+    <script src="/dist/js/waves.js"></script>
     <!--Menu sidebar -->
     <script src="../dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="dist/js/custom.min.js"></script>
+    <script src="/dist/js/custom.min.js"></script>
     <!-- this page js -->
-    
+
 </body>
 
 </html>

@@ -1,12 +1,10 @@
-<script src="assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
-<script src="assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-<script src="assets/extra-libs/DataTables/datatables.min.js"></script>
+
 
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Basic Datatable</h5>
+                <h5 class="card-title">List of Products</h5>
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="thead-light">
@@ -73,6 +71,9 @@
 
 <!-- this page js -->
 <!--Tham khao: https://stackoverflow.com/questions/16371678/all-checkboxes-need-to-be-checked-and-unchecked-with-the-main-checkbox -->
+<script src="assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
+<script src="assets/extra-libs/multicheck/jquery.multicheck.js"></script>
+<script src="assets/extra-libs/DataTables/datatables.min.js"></script>
 <script>
     $('input[id=mainCheckbox]').click(function () {
         $("INPUT[name='listCheck']").prop('checked', this.checked);

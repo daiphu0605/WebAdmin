@@ -40,11 +40,17 @@ async function index(req, res, next){
      res.render('users/list', {layout: 'main_layout', users, page});
 };
 
-exports.book = async (req, res, next) => {
+exports.user = async (req, res, next) => {
     //const item = req.body.book_id;
     // Get detailbooks from model
     var BookID = req.params.id;
     const detail = await productService.getBookByID(BookID);
 
     res.render('detailBook/detail', {layout: 'detaillayout', detail});
+};
+
+exports.CreateNew = async (req, res, next) => {
+    //const item = req.body.book_id;
+    // Get detailbooks from model
+    res.render('users/create_new', {layout: 'main_layout'});
 };
