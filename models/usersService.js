@@ -1,5 +1,5 @@
 var connection = require('./connection');
-
+const SQL=require('./SQL')
 
 const LIMITED_ITEM_PER_PAGE = 20;
 
@@ -135,4 +135,28 @@ exports.getUserByID = async(UserID) =>{
       })
   });
   return result;
+}
+async function queryAsync(sql){
+    return new Promise((resolve,reject)=>{
+        connection.query(sql,(error,results)=>{
+            if (error){
+                reject(error);
+                return;
+            }
+            resolve(results);
+            return;
+
+        });
+
+    })
+
+
+}
+exports.blockUsers=async(listUser)=>{
+    var sql = new SQL;
+    sql.Update('user_info');
+    sql.Set("status='Block'");
+    sql.Where("username " + sql.In(listUser));
+    console.log(sql.Query());
+    await queryAsync(sql.Query());
 }

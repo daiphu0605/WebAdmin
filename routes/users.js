@@ -7,4 +7,7 @@ router.get('/delete', userController.UserCon);
 router.get('/:id', userController.CreateNew);
 router.get('/create-user', userController.CreateNew);
 
+router.post('/delete', userController.UserDelPost);
+router.post('/create-user', userController.CreateNew);
+
 module.exports = router;

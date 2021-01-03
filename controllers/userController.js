@@ -64,3 +64,10 @@ exports.CreateNew = async (req, res, next) => {
     // Get detailbooks from model
     res.render('users/create_new', {layout: 'main_layout'});
 };
+
+exports.UserDelPost = async (req, res, next) => {
+    var result=[]
+    for (var i in req.body)result.push(i);
+    await userService.blockUsers(result);
+    index(req, res, next);
+}

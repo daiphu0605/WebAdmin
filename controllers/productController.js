@@ -60,8 +60,19 @@ exports.book = async (req, res, next) => {
     res.render('detailBook/detail', {layout: 'detaillayout', detail});
 };
 
-exports.CreateNew = async (req, res, next) => {
+exports.CreateNewPage = async (req, res, next) => {
     //const item = req.body.book_id;
     // Get detailbooks from model
     res.render('products/create_new', {layout: 'main_layout'});
 };
+
+exports.ProductRemovePage= (req, res, next) => {
+        index(req, res, next);
+}
+
+exports.ProductRemovePost = async (req, res, next) => {
+    var result=[]
+    for (var i in req.body)result.push(i);
+    await productService.removeProducts(result);
+    index(req, res, next);
+}
