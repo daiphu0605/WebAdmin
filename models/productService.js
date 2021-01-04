@@ -1,6 +1,6 @@
 var connection = require("./connection");
 var SQL = require("./SQL");
-const LIMITED_ITEM_PER_PAGE = 20;
+const LIMITED_ITEM_PER_PAGE = 100;
 
 var pageDetail = {
   currentPage: 1,
@@ -86,6 +86,12 @@ async function getTotalPage() {
   return result;
 }
 
+async function getMaxID(){
+  var sql ="SELECT MAX(id) FROM hcmus_book_store.book_info";
+  result = await queryAsync(sql);
+  return result[0]['MAX(id)'];
+}
+
 exports.products = async (page, catID) => {
   const listBooks = await getBooks(page, catID);
   return listBooks;
@@ -142,7 +148,7 @@ async function queryAsync(sql){
                 return;
             }
             resolve(results);
-            return;
+            return results;
 
         });
 
@@ -157,4 +163,19 @@ exports.removeProducts = async (listProduct) => {
   sql.Where("id " + sql.In(listProduct));
   console.log(sql.Query());
   await queryAsync(sql.Query());
+};
+
+exports.addNewProduct = async(req, res,image_url) => {
+  //var sql = "SELECT * FROM hcmus_book_store.book_info ";
+  //sql = sql + "WHERE id='" + req.body.id + "';";
+  data=req.body;
+  id=await getMaxID();
+  id+=1;
+  var sql =
+    "INSERT INTO hcmus_book_store.book_info (id, title, base_price, image, isbn, supplier, author, publisher, public_year, weight, size, number_page, page) VALUES ";
+  sql = sql + "('" + id + "', '" + data.title + "', '" + data.base_price  + "', '" + image_url + "', '" + data.isbn + "', '" + data.supplier;
+  sql = sql +  "', '" + data.author + "', '" + data.publisher  +  "', '" + data.public_year  +  "', '" + data.weight +  "', '" + data.size +  "', '" + data.number_page +  "', '" + data.page +  "')";
+  console.log(sql);
+  await queryAsync(sql);
+  return true;
 };

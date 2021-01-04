@@ -10,9 +10,9 @@ router.get("/", (req, res, next) => {
 
 router.post("/", upload.single("image"), async (req, res, next) => {
   const result = await cloudinary.uploader.upload(req.file.path);
-
+  const fs = require("fs");
+  fs.unlinkSync(req.file.path);
   addBook.addBook(req, res, result.url);
-
 });
 
 module.exports = router;

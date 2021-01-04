@@ -5,65 +5,69 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <form class="form-horizontal">
+            <form class="form-horizontal" method="POST">
                 <div class="card-body">
                     <h4 class="card-title">Add New User</h4>
                     <div class="form-group row">
                         <label for="username" class="col-sm-3 text-right control-label col-form-label">Username</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="username" placeholder="Username Here">
+                            <input type="text" class="form-control" name="username" placeholder="Username Here" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="password" class="col-sm-3 text-right control-label col-form-label">Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" id="password" placeholder="Password Here">
+                            <input type="password" class="form-control" name="password" placeholder="Password Here" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="retypepass" class="col-sm-3 text-right control-label col-form-label">Retype Password</label>
+                        <label for="retypepass" class="col-sm-3 text-right control-label col-form-label" required>Retype
+                            Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" id="retypepass" placeholder="Password Here">
+                            <input type="password" class="form-control" name="retypepass" placeholder="Password Here" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">First Name</label>
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Full Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="fname" placeholder="First Name Here">
+                            <input type="text" class="form-control" name="fname" placeholder="Full Name Here" required>
                         </div>
                     </div>
+                    <!--
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Last Name</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="lname" placeholder="Last Name Here">
                         </div>
                     </div>
+                    -->
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">Company</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="email1" placeholder="Company Name Here">
+                            <input type="text" class="form-control" name="email1" placeholder="Company Name Here">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Contact No</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="cono1" placeholder="Contact No Here">
+                            <input type="text" class="form-control" name="cono1" placeholder="Contact No Here" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                                    <label class="col-md-3">Avatar Upload</label>
-                                    <div class="col-md-9">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                                            <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-                                            <div class="invalid-feedback">Example invalid custom file feedback</div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <label class="col-sm-3 text-right control-label col-form-label">Avatar Upload</label>
+                        <div class="col-md-9">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="avatar" required>
+                                <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                <div class="invalid-feedback">Example invalid custom file feedback</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="border-top">
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary">Submit</button>
+                        
+                        <input type="submit" class="btn btn-primary" value="Submit">
                     </div>
                 </div>
             </form>
