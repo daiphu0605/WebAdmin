@@ -4,6 +4,9 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const dotenv = require("dotenv");
+var hbs = require( 'express-handlebars' );
+
+
 require("dotenv").config({
   path: path.resolve(__dirname, "./.env"),
 });
@@ -16,6 +19,7 @@ var productsRouter=require("./routes/products");
 var signIn = require("./routes/signin");
 var signUp = require("./routes/signup");
 
+var productsAPI=require("./routes/api/products");
 
 var app = express();
 
@@ -40,6 +44,7 @@ app.use("/products", productsRouter);
 app.use("/signin", signIn);
 app.use("/signUp", signUp);
 
+app.use("/api/products",productsAPI);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

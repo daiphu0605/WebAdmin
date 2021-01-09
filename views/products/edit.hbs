@@ -8,61 +8,70 @@
 
             <form class="form-horizontal" accept-charset="UTF-8" method="POST" enctype="multipart/form-data">
                 <div class="card-body">
-                    <h4 class="card-title">Add New Product</h4>
+                    <h4 class="card-title">Edit product</h4>
                     <div class="form-group row">
                         <label for="title" class="col-sm-3 text-right control-label col-form-label">Title</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="title" placeholder="Title Here">
+                            <input type="text" class="form-control" name="title" placeholder="Title Here"
+                                value="{{detail.title}}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="price" class="col-sm-3 text-right control-label col-form-label">Price</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="base_price" placeholder="Price Here">
+                            <input type="number" class="form-control" name="base_price" placeholder="Price Here"
+                                value="{{detail.base_price}}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="isbn" class="col-sm-3 text-right control-label col-form-label">ISBN</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="isbn" placeholder="ISBN Here">
+                            <input type="text" class="form-control" name="isbn" placeholder="ISBN Here"
+                                value="{{detail.isbn}}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="supplier" class="col-sm-3 text-right control-label col-form-label">Supplier</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="supplier" placeholder="Supplier Here">
+                            <input type="text" class="form-control" name="supplier" placeholder="Supplier Here"
+                                value="{{detail.supplier}}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="author" class="col-sm-3 text-right control-label col-form-label">Author</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="author" placeholder="Author Here">
+                            <input type="text" class="form-control" name="author" placeholder="Author Here"
+                                value="{{detail.author}}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="publisher"
                             class="col-sm-3 text-right control-label col-form-label">Publisher</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="publisher" placeholder="Publisher Here">
+                            <input type="text" class="form-control" name="publisher" placeholder="Publisher Here"
+                                value="{{detail.publisher}}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="public_year" class="col-sm-3 text-right control-label col-form-label">Public
                             year</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="public_year" placeholder="Public Year Here">
+                            <input type="number" class="form-control" name="public_year" placeholder="Public Year Here"
+                                value="{{detail.public_year}}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="weight" class="col-sm-3 text-right control-label col-form-label">Weight</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" name="weight" placeholder="Weight Here">
+                            <input type="number" class="form-control" name="weight" placeholder="Weight Here"
+                                value="{{detail.weight}}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="size" class="col-sm-3 text-right control-label col-form-label">Size</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="size" placeholder="Size Here">
+                            <input type="text" class="form-control" name="size" placeholder="Size Here"
+                                value="{{detail.size}}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -70,35 +79,50 @@
                             page</label>
                         <div class="col-sm-9">
                             <input type="number" class="form-control" name="number_page"
-                                placeholder="Number of page Here">
+                                placeholder="Number of page Here" value="{{detail.number_page}}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="number_page" class="col-sm-3 text-right control-label col-form-label">Page</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="page" placeholder="Type of page Here">
+                            <input type="text" class="form-control" name="page" placeholder="Type of page Here"
+                                value="{{detail.page}}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 text-right control-label col-form-label">Description Title</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" name="description_title" rows="3" maxlength="500"></textarea>
+                            <textarea class="form-control" name="description_title" rows="3"
+                                maxlength="500">{{detail.description_title}}</textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 text-right control-label col-form-label">File Upload</label>
                         <div class="col-md-9">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input form-control-file" name="image" required accept="image/*">
+                                <!--<input type="file" class="custom-file-input form-control-file" name="image" required
+                                    accept="image/*" value="{{detail.image}}">-->
+                                <input type='file' id="imgInp" class="custom-file-input form-control-file" name="image"
+                                    accept="image/*" value="{{detail.image}}" />
+
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                 <div class="invalid-feedback">Example invalid custom file feedback</div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-3 text-right control-label col-form-label">Preview</label>
+                        <div class="col-md-9">
+                            <img id="blah" src="{{detail.image}}" alt="your image" height="300" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
                         <label class="col-sm-3 text-right control-label col-form-label">Description</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" name="description" rows="10" maxlength="10000"></textarea>
+                            <textarea class="form-control" name="description" rows="10"
+                                maxlength="10000">{{detail.description}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -107,6 +131,9 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
+            </form>
+            <form runat="server">
+
             </form>
 
 
@@ -124,3 +151,8 @@
 <script src="/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
 <script src="/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="/assets/libs/quill/dist/quill.min.js"></script>
+<script>
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
+</script>

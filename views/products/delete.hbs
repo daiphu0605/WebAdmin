@@ -1,4 +1,4 @@
-<form id='search_form' onsubmit="replaceProducts('1', '1', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}');
+<form id='search_form' onsubmit="replaceProducts('1', '1', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}','Block');
 }">
     <div class="input-group">
         <input type="text" class="form-control" placeholder="Search" name="search">
@@ -66,9 +66,9 @@
                             </tbody>
                             <!--Start product-->
                         </table>
-                        <div class="card-body " id="group_button" hidden>
-                            <input type="submit" class="btn btn-danger float-right" value="Remove" >
-
+                        <div class="card-body float-right group_button" hidden id="group_button">
+                            <input type="submit" class="btn btn-success btn-group" value="Restore" name="restore">
+                            <input type="submit" class="btn btn-danger btn-group" value="Delete" name="delete">
                         </div>
                     </form>
                 </div>
@@ -80,20 +80,20 @@
 
 <div class="pagination" id="page">
     <button class="page-link"
-        onclick="replaceProducts('{{page.currentPage}}', '1', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}');">
+        onclick="replaceProducts('{{page.currentPage}}', '1', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}','Block');">
         Đầu
     </button>
 
     {{#if page.prevPrevPage}}
     <button class="page-link"
-        onclick="replaceProducts('{{page.currentPage}}', '{{page.prevPrevPage}}', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}');">
+        onclick="replaceProducts('{{page.currentPage}}', '{{page.prevPrevPage}}', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}','Block');">
         {{page.prevPrevPage}}
     </button>
     {{/if}}
 
     {{#if page.prevPage}}
     <button class="page-link"
-        onclick="replaceProducts('{{page.currentPage}}', '{{page.prevPage}}', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}');">
+        onclick="replaceProducts('{{page.currentPage}}', '{{page.prevPage}}', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}','Block');">
         {{page.prevPage}}
     </button>
     {{/if}}
@@ -109,20 +109,20 @@
 
     {{#if page.nextPage}}
     <button class="page-link"
-        onclick="replaceProducts('{{page.currentPage}}', '{{page.nextPage}}', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}');">
+        onclick="replaceProducts('{{page.currentPage}}', '{{page.nextPage}}', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}','Block');">
         {{page.nextPage}}
     </button>
     {{/if}}
 
     {{#if page.nextNextPage}}
     <button class="page-link"
-        onclick="replaceProducts('{{page.currentPage}}','{{page.nextNextPage}}', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}');">
+        onclick="replaceProducts('{{page.currentPage}}','{{page.nextNextPage}}', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}','Block');">
         {{page.nextNextPage}}
     </button>
     {{/if}}
 
     <button class="page-link"
-        onclick="replaceProducts('{{page.currentPage}}','{{page.totalPage}}', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}');">
+        onclick="replaceProducts('{{page.currentPage}}','{{page.totalPage}}', '{{search}}', '{{category}}', '{{sort}}', '{{price}}', '{{supplier}}', '{{author}}', '{{publisher}}','Block');">
         Cuối
     </button>
 </div>
@@ -155,7 +155,7 @@
                                     </th>
                                 </tr>
                                 \{{/each}}
-                            
+
 </script>
 <!--
 <script type="text/x-handlebars-template" id="product-list11">
@@ -207,9 +207,9 @@
                                 \{{/each}}
                             </tbody>
                         </table>
-                        <div class="card-body">
-                            <input type="submit" class="btn btn-danger float-right" value="Remove">
-
+                        <div class="card-body float-right group_button" hidden id="group_button">
+                            <input type="submit" class="btn btn-danger btn-group" value="Delete" name="delete">
+                            <input type="submit" class="btn btn-success btn-group" value="Restore" name="restore">
                         </div>
                     </form>
                 </div>
@@ -221,20 +221,19 @@
 </script>
 -->
 
-
 <script type="text/x-handlebars-template" id="page-list">
-	<button class="page-link" onclick="replaceProducts('\{{this.currentPage}}', '1', '\{{this.search}}', '\{{this.category}}','\{{this.sort}}','\{{this.price}}','\{{this.supplier}}','\{{this.author}}','\{{this.publisher}}');">
+	<button class="page-link" onclick="replaceProducts('\{{this.currentPage}}', '1', '\{{this.search}}', '\{{this.category}}','\{{this.sort}}','\{{this.price}}','\{{this.supplier}}','\{{this.author}}','\{{this.publisher}}','Block');">
 		Đầu
 	</button>
 
 	\{{#if this.prevPrevPage}}
-		<button class="page-link" onclick="replaceProducts('\{{this.currentPage}}','\{{this.prevPrevPage}}', '\{{this.search}}', '\{{this.category}}','\{{this.sort}}','\{{this.price}}','\{{this.supplier}}','\{{this.author}}','\{{this.publisher}}');">
+		<button class="page-link" onclick="replaceProducts('\{{this.currentPage}}','\{{this.prevPrevPage}}', '\{{this.search}}', '\{{this.category}}','\{{this.sort}}','\{{this.price}}','\{{this.supplier}}','\{{this.author}}','\{{this.publisher}}','Block');">
 			\{{this.prevPrevPage}}
 		</button>
 	\{{/if}}
 {{!-- /shop?page={{page.prevPage}} --}}
 	\{{#if this.prevPage}}
-		<button class="page-link" onclick="replaceProducts('\{{this.currentPage}}','\{{this.prevPage}}', '\{{this.search}}', '\{{this.category}}','\{{this.sort}}','\{{this.price}}','\{{this.supplier}}','\{{this.author}}','\{{this.publisher}}');">
+		<button class="page-link" onclick="replaceProducts('\{{this.currentPage}}','\{{this.prevPage}}', '\{{this.search}}', '\{{this.category}}','\{{this.sort}}','\{{this.price}}','\{{this.supplier}}','\{{this.author}}','\{{this.publisher}}','Block');">
 			\{{this.prevPage}}
 		</button>
         
@@ -250,28 +249,28 @@
 	\{{/if}}
 {{!-- /shop?page={{page.nextPage}} --}}
 	\{{#if this.nextPage}}
-		<button class="page-link" onclick="replaceProducts('\{{this.currentPage}}','\{{this.nextPage}}', '\{{this.search}}', '\{{this.category}}','\{{this.sort}}','\{{this.price}}','\{{this.supplier}}','\{{this.author}}','\{{this.publisher}}');">
+		<button class="page-link" onclick="replaceProducts('\{{this.currentPage}}','\{{this.nextPage}}', '\{{this.search}}', '\{{this.category}}','\{{this.sort}}','\{{this.price}}','\{{this.supplier}}','\{{this.author}}','\{{this.publisher}}','Block');">
 			\{{this.nextPage}}
 		</button>
 	\{{/if}}
 
 	\{{#if this.nextNextPage}}
-		<button class="page-link" onclick="replaceProducts('\{{this.currentPage}}','\{{this.nextNextPage}}', '\{{this.search}}', '\{{this.category}}','\{{this.sort}}','\{{this.price}}','\{{this.supplier}}','\{{this.author}}','\{{this.publisher}}');">
+		<button class="page-link" onclick="replaceProducts('\{{this.currentPage}}','\{{this.nextNextPage}}', '\{{this.search}}', '\{{this.category}}','\{{this.sort}}','\{{this.price}}','\{{this.supplier}}','\{{this.author}}','\{{this.publisher}}','Block');">
 			\{{this.nextNextPage}}
 		</button>
 	\{{/if}}
 {{!-- /shop?page={{page.totalPage}} --}}
-	<button class="page-link" onclick="replaceProducts('\{{this.currentPage}}', '\{{this.totalPage}}', '\{{this.search}}', '\{{this.category}}','\{{this.sort}}','\{{this.price}}','\{{this.supplier}}','\{{this.author}}','\{{this.publisher}}');">
+	<button class="page-link" onclick="replaceProducts('\{{this.currentPage}}', '\{{this.totalPage}}', '\{{this.search}}', '\{{this.category}}','\{{this.sort}}','\{{this.price}}','\{{this.supplier}}','\{{this.author}}','\{{this.publisher}}','Block');">
 		Cuối
 	</button>
 </script>
 
 <!-- this page js -->
 <!--Tham khao: https://stackoverflow.com/questions/16371678/all-checkboxes-need-to-be-checked-and-unchecked-with-the-main-checkbox -->
-<script src="assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
-<script src="assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-<script src="assets/extra-libs/DataTables/datatables.min.js"></script>
-<script src="assets/extra-libs/DataTables/datatables.min.js"></script>
+<script src="/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
+<script src="/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
+<script src="/assets/extra-libs/DataTables/datatables.min.js"></script>
+<script src="/assets/extra-libs/DataTables/datatables.min.js"></script>
 <!--
 <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 <script src="js/main.js"></script>
@@ -281,5 +280,4 @@
     reverseSort = (sort_string) => {
         if (sort_string == '') return
     }
-
 </script>
