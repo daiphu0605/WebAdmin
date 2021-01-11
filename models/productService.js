@@ -70,10 +70,10 @@ async function getTotalPage(
   author,
   publisher,
   supplier,
-  status='Active'
+  status = "Active"
 ) {
   var sql = "SELECT COUNT(*) FROM hcmus_book_store.book_info ";
-  console.log('Inside get total page');
+  console.log("Inside get total page");
   console.log(status);
   var bodyStr = await getBodyString(
     search,
@@ -111,6 +111,8 @@ async function getMaxID() {
   result = await queryAsync(sql);
   return result[0]["MAX(id)"];
 }
+
+//Get querry string
 async function getSortString(sort) {
   var result = "";
 
@@ -132,7 +134,6 @@ async function getSortString(sort) {
   return result;
 }
 
-//Get querry string
 async function getCategoryString(category) {
   var result = "";
 
@@ -275,7 +276,7 @@ async function getBodyString(
   author,
   publisher,
   supplier,
-  status='Active'
+  status = "Active"
 ) {
   var result = "";
 
@@ -302,17 +303,13 @@ async function getBodyString(
   var supplierStr = await getSupplierString(whereStr, supplier);
   whereStr += supplierStr;
 
-  console.log('Inside get body string');
-  console.log(status);
-
-  status_string="status='"+status+"' ";
-  if(whereStr){
-    status_string="AND status='"+status+"' ";
+  status_string = "status='" + status + "' ";
+  if (whereStr) {
+    status_string = "AND status='" + status + "' ";
+  } else {
+    status_string = "WHERE status='" + status + "' ";
   }
-  else{
-    status_string="WHERE status='"+status+"' ";
-  }
-  result = whereStr+ status_string + sortStr;
+  result = whereStr + status_string + sortStr;
   console.log(result);
   return result;
 }
@@ -325,7 +322,7 @@ async function getSqlString(
   author,
   publisher,
   supplier,
-  status='Active'
+  status = "Active"
 ) {
   var sql = "SELECT * FROM hcmus_book_store.book_info ";
   var offset = LIMITED_ITEM_PER_PAGE * (page - 1);
@@ -370,7 +367,7 @@ exports.getBooks = async (
   author,
   publisher,
   supplier,
-  status='Active'
+  status = "Active"
 ) => {
   var result;
   var sql = await getSqlString(
@@ -402,7 +399,7 @@ exports.pageNumber = async (
   author,
   publisher,
   supplier,
-  status='Active'
+  status = "Active"
 ) => {
   pageDetail.currentPage = page;
   var temp = await getTotalPage(
@@ -465,7 +462,7 @@ exports.getPageApi = async (
   author,
   publisher,
   supplier,
-  status='Active'
+  status = "Active"
 ) => {
   pageDetailAPI.currentPage = page;
   var temp = await getTotalPage(
@@ -573,14 +570,12 @@ exports.deleteProducts = async (listProduct) => {
   await queryAsync(sql.Query());
 };
 
-
 exports.addNewProduct = async (req, res, image_url, cloudinary_id) => {
   //var sql = "SELECT * FROM hcmus_book_store.book_info ";
   //sql = sql + "WHERE id='" + req.body.id + "';";
   data = req.body;
   var id = await getMaxID();
   id += 1;
-  var title;
   var sql =
     "INSERT INTO hcmus_book_store.book_info (id, title, base_price, image, isbn, supplier, author, publisher, public_year, weight, size, number_page, page, description_title, description,cloudinary_id) VALUES ";
   sql =
@@ -614,21 +609,29 @@ exports.addNewProduct = async (req, res, image_url, cloudinary_id) => {
     "', '" +
     data.page +
     "', '" +
-
     data.description_title +
     "', '" +
-
     data.description +
     "', '" +
-
     cloudinary_id +
     "')";
+  console.log(sql);
+  await queryAsync(sql);
+
+  sql =
+    "INSERT INTO hcmus_book_store.list_categories(id_book,id_category) VALUES ";
+  var iduser_category;
+  data.category.forEach((element) => {
+    iduser_category = "('" + id + "','" + element + "'),";
+    sql += iduser_category;
+  });
+  sql = sql.slice(0, -1);
   console.log(sql);
   await queryAsync(sql);
   return true;
 };
 
-exports.editProduct = async (req, res, image_url,cloudinary_id) => {
+exports.editProduct = async (req, res, image_url, cloudinary_id) => {
   //var sql = "SELECT * FROM hcmus_book_store.book_info ";
   //sql = sql + "WHERE id='" + req.body.id + "';";
   data = req.body;
@@ -659,21 +662,14 @@ exports.editProduct = async (req, res, image_url,cloudinary_id) => {
     data.size +
     "', number_page='" +
     data.number_page +
-
     "', page='" +
     data.page +
-
     "', description='" +
-    data.description+
-
+    data.description +
     "', description_title='" +
     data.description_title +
-
-
     "', cloudinary_id='" +
     cloudinary_id +
-
-
     "' WHERE id='" +
     req.params.id +
     "';";
@@ -816,4 +812,18 @@ exports.getPriceCode = async (price) => {
   }
 
   return code;
+};
+
+exports.getCategoryList = async () => {
+  var sql = "SELECT * FROM hcmus_book_store.category";
+  result = await queryAsync(sql);
+  return result;
+};
+
+exports.getCatbyBookID = async (BookID) => {
+  var sql =
+    "SELECT category.category_name FROM category JOIN list_categories ON category.id_category=list_categories.id_category WHERE list_categories.id_book=";
+    sql=sql+BookID;
+  result = await queryAsync(sql);
+  return result;
 };

@@ -5,32 +5,41 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <form class="form-horizontal" method="POST">
+            <form class="form-horizontal" accept-charset="UTF-8" method="POST" enctype="multipart/form-data">
                 <div class="card-body">
                     <h4 class="card-title">Add New User</h4>
                     <div class="form-group row">
                         <label for="username" class="col-sm-3 text-right control-label col-form-label">Username</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="username" placeholder="Username Here" required>
+                            <input type="text" class="form-control" name="username" placeholder="Username Here"
+                                required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="password" class="col-sm-3 text-right control-label col-form-label">Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" name="password" placeholder="Password Here" required>
+                            <input type="password" class="form-control" name="password" placeholder="Password Here"
+                                required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="retypepass" class="col-sm-3 text-right control-label col-form-label" required>Retype
                             Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" name="retypepass" placeholder="Password Here" required>
+                            <input type="password" class="form-control" name="retypepass" placeholder="Password Here"
+                                required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Full Name</label>
+                        <label for="fullname" class="col-sm-3 text-right control-label col-form-label">Full Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="fname" placeholder="Full Name Here" required>
+                            <input type="text" class="form-control" name="fullname" placeholder="Fullname Here" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="role" class="col-sm-3 text-right control-label col-form-label">Role</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="role" placeholder="Default by user">
                         </div>
                     </div>
                     <!--
@@ -42,31 +51,39 @@
                     </div>
                     -->
                     <div class="form-group row">
-                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">Company</label>
+                        <label for="email" class="col-sm-3 text-right control-label col-form-label">Email</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="email1" placeholder="Company Name Here">
+                            <input type="text" class="form-control" name="email" placeholder="Company Name Here">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Contact No</label>
+                        <label for="contact" class="col-sm-3 text-right control-label col-form-label">Contact No</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="cono1" placeholder="Contact No Here" required>
+                            <input type="text" class="form-control" name="contact" placeholder="Contact No Here"
+                                required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 text-right control-label col-form-label">Avatar Upload</label>
                         <div class="col-md-9">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="avatar" required>
+                                <input type='file' id="imgInp" class="custom-file-input form-control-file" name="avatar"
+                                    accept="image/*" />
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                 <div class="invalid-feedback">Example invalid custom file feedback</div>
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 text-right control-label col-form-label">Preview</label>
+                        <div class="col-md-9">
+                            <img id="blah" src="" alt="your image" height="300" />
+                        </div>
+                    </div>
                 </div>
                 <div class="border-top">
                     <div class="card-body">
-                        
+
                         <input type="submit" class="btn btn-primary" value="Submit">
                     </div>
                 </div>
@@ -84,3 +101,8 @@
 <script src="/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
 <script src="/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="/assets/libs/quill/dist/quill.min.js"></script>
+<script>
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
+</script>

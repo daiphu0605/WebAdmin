@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/assets/libs/select2/dist/css/select2.min.css">
+<link href="/dist/css/style.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/assets/libs/jquery-minicolors/jquery.minicolors.css">
-<link rel="stylesheet" type="text/css" href="/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-<link rel="stylesheet" type="text/css" href="/assets/libs/quill/dist/quill.snow.css">
+
 <div class="row">
     <div class="col-md-6">
         <div class="card">
@@ -13,6 +13,17 @@
                         <label for="title" class="col-sm-3 text-right control-label col-form-label">Title</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="title" placeholder="Title Here">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                         <label for="price" class="col-sm-3 text-right control-label col-form-label">Category</label>
+                        <div class="col-md-9" >
+                            <select class="select2 form-control m-t-15" multiple="multiple"
+                                style="height: 36px;width: 100%;" name="category" > 
+                                {{#each list_categories}}
+                                    <option value={{id_category}}>{{category_name}}</option>
+                                {{/each}}
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -89,12 +100,23 @@
                         <label class="col-sm-3 text-right control-label col-form-label">File Upload</label>
                         <div class="col-md-9">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input form-control-file" name="image" required accept="image/*">
+                                <!--<input type="file" class="custom-file-input form-control-file" name="image" required
+                                    accept="image/*" value="{{detail.image}}">-->
+                                <input type='file' id="imgInp" class="custom-file-input form-control-file" name="image"
+                                    accept="image/*" value="{{detail.image}}" />
+
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                 <div class="invalid-feedback">Example invalid custom file feedback</div>
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 text-right control-label col-form-label">Preview</label>
+                        <div class="col-md-9">
+                            <img id="blah" height="300" />
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <label class="col-sm-3 text-right control-label col-form-label">Description</label>
                         <div class="col-md-9">
@@ -122,5 +144,14 @@
 <script src="/assets/libs/jquery-asGradient/dist/jquery-asGradient.js"></script>
 <script src="/assets/libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js"></script>
 <script src="/assets/libs/jquery-minicolors/jquery.minicolors.min.js"></script>
-<script src="/assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="/assets/libs/quill/dist/quill.min.js"></script>
+
+
+
+<script>
+    $(".select2").select2();
+</script>
+<script>
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
+</script>

@@ -130,8 +130,6 @@ async function index(req, res, next) {
   const priceCode = await productService.getPriceCode(price);
 
   // Pass data to view to display list of books
-  console.log("Before render");
-  console.log(page);
   res.render("products/list", {
     layout: "main_layout",
     books,
@@ -283,15 +281,16 @@ exports.book = async (req, res, next) => {
   // Get detailbooks from model
   var BookID = req.params.id;
   const detail = await productService.getBookByID(BookID);
-
+  const category = await productService.getCatbyBookID(BookID);
   //res.render("detailBook/detail", { layout: "detaillayout", detail });
-  res.render("products/detail", { layout: "main_layout", detail });
+  res.render("products/detail", { layout: "main_layout", detail,category });
 };
 
 exports.CreateNewPage = async (req, res, next) => {
   //const item = req.body.book_id;
   // Get detailbooks from model
-  res.render("products/create_new", { layout: "main_layout" });
+  var list_categories=await productService.getCategoryList();
+  res.render("products/create_new", { layout: "main_layout",list_categories });
 };
 
 exports.CreateNewPost = async (req, res, next) => {
@@ -304,7 +303,7 @@ exports.CreateNewPost = async (req, res, next) => {
     await productService.addNewProduct(req, res, result.url, result.public_id)
   ) {
     //Render success page + return
-    res. t("/products");
+    res.redirect("/products");
   }
   //Render errorpage
 };

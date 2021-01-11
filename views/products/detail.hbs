@@ -9,6 +9,20 @@
         <table class="table table-striped">
             <tbody>
                 <tr>
+                    <th scope="row">Category</th>
+                    <td>
+                        {{#each category}}
+                        {{category_name}}
+                        {{/each}}
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <th scope=" row">Price</th>
+                    <td>{{detail.base_price}}</td>
+
+                </tr>
+                <tr>
                     <th scope="row">Price</th>
                     <td>{{detail.base_price}}</td>
 
