@@ -358,6 +358,14 @@ async function queryAsync(sql) {
   });
 }
 
+async function removeAllCatbyBookID(BookID) {
+  var sql = "DELETE FROM list_categories WHERE id_book = ";
+  sql = sql + BookID;
+  console.log(sql);
+  result = await queryAsync(sql);
+  return result;
+}
+
 exports.getBooks = async (
   page,
   search,
@@ -551,7 +559,7 @@ exports.removeProducts = async (listProduct) => {
   await queryAsync(sql.Query());
 };
 
-//Set status of product to Active 
+//Set status of product to Active
 exports.restoreProducts = async (listProduct) => {
   console.log(listProduct);
   var sql = new SQL();
@@ -562,7 +570,7 @@ exports.restoreProducts = async (listProduct) => {
   await queryAsync(sql.Query());
 };
 
-//Set status of product to Delete 
+//Set status of product to Delete
 exports.deleteProducts = async (listProduct) => {
   console.log(listProduct);
   var sql = new SQL();
@@ -578,7 +586,7 @@ exports.addNewProduct = async (req, res, image_url, cloudinary_id) => {
   data = req.body;
   var id = await getMaxID();
   id += 1;
-  //Add to hcmus_book_store.book_info 
+  //Add to hcmus_book_store.book_info
   var sql =
     "INSERT INTO hcmus_book_store.book_info (id, title, base_price, image, isbn, supplier, author, publisher, public_year, weight, size, number_page, page, description_title, description,cloudinary_id) VALUES ";
   sql =
@@ -677,6 +685,18 @@ exports.editProduct = async (req, res, image_url, cloudinary_id) => {
     "' WHERE id='" +
     req.params.id +
     "';";
+  console.log(sql);
+  await queryAsync(sql);
+  //Add to hcmus_book_store.list_categories
+  await removeAllCatbyBookID(req.params.id);
+  sql =
+    "INSERT INTO hcmus_book_store.list_categories(id_book,id_category) VALUES ";
+  var idbook_category;
+  data.category.forEach((element) => {
+    idbook_category = "('" + req.params.id + "','" + element + "'),";
+    sql += idbook_category;
+  });
+  sql = sql.slice(0, -1);
   console.log(sql);
   await queryAsync(sql);
   return true;
@@ -829,8 +849,10 @@ exports.getCategoryList = async () => {
 exports.getCatbyBookID = async (BookID) => {
   var sql =
     "SELECT category.id_category, category.category_name FROM category JOIN list_categories ON category.id_category=list_categories.id_category WHERE list_categories.id_book=";
-    sql=sql+BookID;
-    console.log(sql);
+  sql = sql + BookID;
+  console.log(sql);
   result = await queryAsync(sql);
   return result;
 };
+
+

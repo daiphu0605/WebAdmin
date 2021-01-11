@@ -334,23 +334,30 @@ exports.EditPage = async (req, res, next) => {
 
   var list_category = await productService.getCategoryList();
 
-  category=JSON.stringify(category);
-  category=JSON.parse(category);
+  category = Object.values(category);
 
-  list_category=JSON.stringify(list_category);
-  list_category=JSON.parse(list_category);
+  list_category = Object.values(list_category);
 
+  category.forEach((item, index) => {
+    category[index] = Object.values(item);
+  });
 
-  console.log(list_category.includes(category[0]));
+  list_category.forEach((item, index) => {
+    list_category[index] = Object.values(item);
+  });
 
-  console.log(list_category)
-
-  console.log(category[0])
-
-  list_category = list_category.filter( function( el ) {
-    return !category.includes( el );
-  } );
-
+  category.forEach((ele) => {
+    var i = 0;
+    while (i < list_category.length) {
+      if (list_category[i][0] == ele[0]) {
+        list_category.splice(i, 1);
+        break;
+      }
+      i++;
+    }
+  });
+  console.log(list_category);
+  console.log(category);
   //res.render("detailBook/detail", { layout: "detaillayout", detail });
   res.render("products/edit", {
     layout: "main_layout",
