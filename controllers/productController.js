@@ -283,14 +283,14 @@ exports.book = async (req, res, next) => {
   const detail = await productService.getBookByID(BookID);
   const category = await productService.getCatbyBookID(BookID);
   //res.render("detailBook/detail", { layout: "detaillayout", detail });
-  res.render("products/detail", { layout: "main_layout", detail,category });
+  res.render("products/detail", { layout: "main_layout", detail, category });
 };
 
 exports.CreateNewPage = async (req, res, next) => {
   //const item = req.body.book_id;
   // Get detailbooks from model
-  var list_categories=await productService.getCategoryList();
-  res.render("products/create_new", { layout: "main_layout",list_categories });
+  var list_categories = await productService.getCategoryList();
+  res.render("products/create_new", { layout: "main_layout", list_categories });
 };
 
 exports.CreateNewPost = async (req, res, next) => {
@@ -330,8 +330,34 @@ exports.EditPage = async (req, res, next) => {
   var BookID = req.params.id;
   const detail = await productService.getBookByID(BookID);
 
+  var category = await productService.getCatbyBookID(BookID);
+
+  var list_category = await productService.getCategoryList();
+
+  category=JSON.stringify(category);
+  category=JSON.parse(category);
+
+  list_category=JSON.stringify(list_category);
+  list_category=JSON.parse(list_category);
+
+
+  console.log(list_category.includes(category[0]));
+
+  console.log(list_category)
+
+  console.log(category[0])
+
+  list_category = list_category.filter( function( el ) {
+    return !category.includes( el );
+  } );
+
   //res.render("detailBook/detail", { layout: "detaillayout", detail });
-  res.render("products/edit", { layout: "main_layout", detail });
+  res.render("products/edit", {
+    layout: "main_layout",
+    detail,
+    category,
+    list_category,
+  });
 };
 
 exports.EditPost = async (req, res, next) => {
