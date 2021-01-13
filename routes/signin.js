@@ -4,6 +4,6 @@ var signIn = require('../controllers/signIn')
 
 router.get('/',signIn.index);
 
-router.post('/',signIn.SignIn);
+router.post('/sign-in',signIn.SignIn);
 
 module.exports = router;

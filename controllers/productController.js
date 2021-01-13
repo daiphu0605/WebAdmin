@@ -19,6 +19,9 @@ async function Search(req, res, next) {
 
 //
 exports.ProductCon = (req, res, next) => {
+  if (typeof req.user === "undefined"){
+    return res.redirect("/signin");
+  }
   index(req, res, next);
 };
 

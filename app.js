@@ -5,6 +5,8 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const dotenv = require("dotenv");
 var hbs = require( 'express-handlebars' );
+var passport = require('./controllers/passport');
+var session = require('express-session');
 
 
 require("dotenv").config({
@@ -17,7 +19,7 @@ var productsRouter=require("./routes/products");
 
 
 var signIn = require("./routes/signin");
-var signUp = require("./routes/signup");
+
 
 var productsAPI=require("./routes/api/products");
 
@@ -31,6 +33,14 @@ var connection = require("./models/connection");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
+app.use(express.static("public"));
+app.use(session({ 
+  secret: 'anything', 
+  resave: true, 
+  saveUninitialized: true 
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -41,8 +51,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
 
-app.use("/signin", signIn);
-app.use("/signUp", signUp);
+app.use("/signin?", signIn);
 
 app.use("/api/products",productsAPI);
 // catch 404 and forward to error handler
