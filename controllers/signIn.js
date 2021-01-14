@@ -1,10 +1,8 @@
-const express = require('express');
-const passport = require('passport');
 var account =require('../models/accounts')
-let password = require('./passport')
+let passport = require('./passport')
 
 exports.SignIn = (req, res,next) => {
-    passport.authenticate("SignIn", function(err,user,info) {
+    passport.authenticate('SignIn', function(err, user, info) {
         if (err){ 
             return next(err);
         }
