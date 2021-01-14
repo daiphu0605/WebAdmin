@@ -8,9 +8,7 @@ passport.use('SignIn',new LocalStrategy({
     passReqToCallback: true
 },
   function(req, username, password, done) {
-    account.SignIn(username,password,function(err,user,info){
-      return done(err,user,info);
-    });
+    account.SignIn(username,password, done);
   }
 ));
 
@@ -19,9 +17,7 @@ passport.serializeUser(function(user, done) {
   });
   
   passport.deserializeUser(function(username, done) {
-    account.getUserByName(username,function(err,user,info){
-      return done(err,user,info);
-    });
+    account.getUserbyName(username, done);
   });
 
 module.exports = passport;

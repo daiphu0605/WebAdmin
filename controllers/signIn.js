@@ -8,7 +8,7 @@ exports.SignIn = (req, res,next) => {
         }
         if (!user){
             var Error;
-            switch (into){
+            switch (info){
                 case "Wrong_User":
                     Error = "Username is not existed."
                     break;
@@ -24,7 +24,7 @@ exports.SignIn = (req, res,next) => {
             }
             return res.redirect("/");
         });
-    })
+    })(req, res, next);
 }
 exports.index =async(req, res,next)=>{
     res.render('sign_in', {layout: 'layout_sign'});

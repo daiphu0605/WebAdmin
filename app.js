@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const dotenv = require("dotenv");
 var hbs = require( 'express-handlebars' );
-var passport = require('./passport/passport');
+var passport = require('./controllers/passport');
 var session = require('express-session');
 
 
