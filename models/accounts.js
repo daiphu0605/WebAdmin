@@ -94,6 +94,7 @@ exports.getUserByName = async (username, callback) => {
 exports.SignIn = async (username, password, callback) => {
     var sql = "SELECT username, password FROM hcmus_book_store.user_info " 
     sql = sql + "WHERE username = '"+username+"' AND role = 'admin' AND status = 'Active'";
+
     var proc = await new Promise((resolve, reject) =>{
         connection.query(sql,(err, results) => {
             if (err) { return reject(err); }
@@ -104,7 +105,7 @@ exports.SignIn = async (username, password, callback) => {
             var hashPass = md5(password);
             var user = results[0];
             if (user.password === hashPass) {
-                return callback(null,user);
+                return callback(null,user,"success");
             }
             return callback(null,false,"Wrong_Pass");
         }
