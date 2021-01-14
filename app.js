@@ -16,15 +16,12 @@ dotenv.config({
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var productsRouter=require("./routes/products");
-var ordersRouter=require("./routes/orders");
-var statisicRouter=require("./routes/statistic");
+
 
 var signIn = require("./routes/signin");
 
 
 var productsAPI=require("./routes/api/products");
-var ordersAPI=require("./routes/api/orders");
-var usersAPI=require("./routes/api/users");
 
 var app = express();
 
@@ -60,16 +57,13 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/", statisicRouter);
+app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
-app.use("/orders", ordersRouter);
 
 app.use("/signin?", signIn);
 
 app.use("/api/products",productsAPI);
-app.use("/api/orders",ordersAPI);
-app.use("/api/users",usersAPI);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

@@ -65,103 +65,18 @@ function replaceProducts(
   );
 }
 
-function replaceOrders(currentpage, page, search, sort, status) {
-  // $.getJSON("/api/shop/book-list-old", {currentpage}, function(oldbooks){
-
-  // })
-  $.getJSON(
-    "/api/orders/page",
-    {
-      page,
-      search,
-      sort,
-      status,
-    },
-    function (temppage) {
-      $.getJSON(
-        "/api/orders/order-list",
-        {
-          page,
-          search,
-          sort,
-          status,
-        },
-        function (orders) {
-          //get template
-          var booktemplate = Handlebars.compile($("#product-list").html());
-          var pagetemplate = Handlebars.compile($("#page-list").html());
-
-          //get data
-          
-          var productHTML = booktemplate({ orders });
-          var pageHTML = pagetemplate(temppage);
-
-          //display html
-          $("#products").html(productHTML);
-          $("#page").html(pageHTML);
-
-          //scroll to top of page
-          //$('html, body').animate({ scrollTop: $('#products-list-header').offset().top }, 'slow');
-          //var urlString = "/shop?page=" + page;
-          //window.history.pushState(books,"3 Cat Shop", urlString);
-        }
-      );
-    }
-  );
-}
-
-function replaceUsers(currentpage, page, search, sort, status) {
-  // $.getJSON("/api/shop/book-list-old", {currentpage}, function(oldbooks){
-  // })
-  $.getJSON(
-    "/api/users/page",
-    { page, search, sort, status },
-    function (temppage) {
-      $.getJSON(
-        "/api/users/user-list",
-        {
-          page,
-          search,
-          sort,
-          status,
-        },
-        function (users) {
-          
-          //get template
-          var booktemplate = Handlebars.compile($("#product-list").html());
-          var pagetemplate = Handlebars.compile($("#page-list").html());
-
-          //get data
-          console.log('Main.js');
-          console.log(temppage);
-          var productHTML = booktemplate({ users });
-          var pageHTML = pagetemplate(temppage);
-
-          //display html
-          $("#products").html(productHTML);
-          $("#page").html(pageHTML);
-
-          //scroll to top of page
-          //$('html, body').animate({ scrollTop: $('#products-list-header').offset().top }, 'slow');
-          //var urlString = "/shop?page=" + page;
-          //window.history.pushState(books,"3 Cat Shop", urlString);
-        }
-      );
-    }
-  );
-}
-
 $(document).on("click", "input[type=checkbox]", function (event) {
   if (this.checked) {
     document.getElementById("group_button").hidden = false;
   }
+  if (!this.checked) {
+    document.getElementById("group_button").hidden = true;
+  }
 });
 
-/*
-$("input[id=mainCheckbox]").click(function () {
-  $("input[type=checkbox]").prop("checked", this.checked);
+$('input[id=mainCheckbox]').click(function () {
+    $("input[type=checkbox]").prop('checked', this.checked);
 });
-*/
 
 (function ($, sr) {
   // debouncing function from John Hann
@@ -278,6 +193,7 @@ $(document).ready(function () {
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
+
 
 (function ($) {
   "use strict";
