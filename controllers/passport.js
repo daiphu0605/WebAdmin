@@ -2,13 +2,13 @@ let passport = require('passport')
 let LocalStrategy = require('passport-local').Strategy;
 let account = require('../models/accounts');
 
-passport.use("SignIn",new LocalStrategy({
+passport.use('sign-in',new LocalStrategy({
     usernameField: "username",
     passwordField: "password",
     passReqToCallback: true
 },
   function(req, username, password, done) {
-    account.signIn(username,password,done);
+    account.SignIn(username,password,done);
   }
 ));
 

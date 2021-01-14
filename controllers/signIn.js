@@ -1,16 +1,15 @@
 const express = require('express');
-const passport = require('passport');
-var account =require('../models/accounts')
-let password = require('./passport')
+const passport = require('./passport');
+var account =require('../models/accounts');
 
 exports.SignIn = (req, res,next) => {
-    passport.authenticate("SignIn", function(err,user,info) {
+    passport.authenticate('sign-in', function(err,user,info) {
         if (err){ 
             return next(err);
         }
         if (!user){
             var Error;
-            switch (into){
+            switch (info){
                 case "Wrong_User":
                     Error = "Username is not existed."
                     break;
@@ -26,7 +25,7 @@ exports.SignIn = (req, res,next) => {
             }
             return res.redirect("/");
         });
-    })
+    })(req, res, next);
 }
 exports.index =async(req, res,next)=>{
     res.render('sign_in', {layout: 'layout_sign'});
