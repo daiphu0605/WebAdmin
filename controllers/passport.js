@@ -17,7 +17,7 @@ passport.serializeUser(function(user, done) {
   });
   
   passport.deserializeUser(function(username, done) {
-    account.getUserbyName(username, done);
+    account.getUserByName(username, done);
   });
 
 module.exports = passport;

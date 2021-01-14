@@ -3,6 +3,7 @@ let passport = require('./passport')
 
 exports.SignIn = (req, res,next) => {
     passport.authenticate('SignIn', function(err, user, info) {
+
         if (err){ 
             return next(err);
         }

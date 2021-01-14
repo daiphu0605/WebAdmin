@@ -9,7 +9,7 @@ var passport = require('./controllers/passport');
 var session = require('express-session');
 
 
-require("dotenv").config({
+dotenv.config({
   path: path.resolve(__dirname, "./.env"),
 });
 
@@ -41,11 +41,21 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(function(req, res, next){
+  res.locals.user = req.user;
+  next();
+})
+
+
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
