@@ -584,6 +584,11 @@ exports.deleteProducts = async (listProduct) => {
 //Add new product
 exports.addNewProduct = async (req, res, image_url, cloudinary_id) => {
   data = req.body;
+  console.log(typeof(data.description_title));
+  data.description_title = data.description_title.replace(/'/g, "");
+  data.description_title = data.description_title.replace(/"/g, "");
+  data.description = data.description.replace(/'/g, "");
+  data.description = data.description.replace(/"/g, "");
   var id = await getMaxID();
   id += 1;
   //Add to hcmus_book_store.book_info
@@ -632,7 +637,10 @@ exports.addNewProduct = async (req, res, image_url, cloudinary_id) => {
   //Add to hcmus_book_store.list_categories
   sql =
     "INSERT INTO hcmus_book_store.list_categories(id_book,id_category) VALUES ";
+  console.log(data.category);
   var iduser_category;
+  if (!data.category) return true;
+
   data.category.forEach((element) => {
     iduser_category = "('" + id + "','" + element + "'),";
     sql += iduser_category;
@@ -854,5 +862,3 @@ exports.getCatbyBookID = async (BookID) => {
   result = await queryAsync(sql);
   return result;
 };
-
-

@@ -1,7 +1,7 @@
 var connection = require("./connection");
-const SQL = require("./SQL");
+var SQL = require("./SQL");
 
-const LIMITED_ITEM_PER_PAGE = 5;
+const LIMITED_ITEM_PER_PAGE = 20;
 
 var pageDetail = {
   currentPage: 1,
@@ -12,6 +12,7 @@ var pageDetail = {
   totalPage: 0,
 };
 
+//Filter of querry
 var pageDetailAPI = {
   currentPage: 1,
   nextPage: 0,
@@ -22,48 +23,40 @@ var pageDetailAPI = {
   search: "",
   sort: "",
   price: "",
-  status:""
 };
 
-async function getUsers(page, catID) {
-  var result;
-  var offset = LIMITED_ITEM_PER_PAGE * (page - 1);
-  if (catID != "") {
-    /*
-        var ListBookID = await getBookIDByCatID(catID);
-        result = await new Promise ((resolve, reject)=>{
-            var sql = "SELECT * FROM hcmus_book_store.book_info WHERE id IN (";
-            ListBookID.forEach(element => sql += "'" + element['id_book'] + "',");
-            sql = sql.substr(0, sql.length - 1);
-            sql = sql + ") LIMIT " + LIMITED_ITEM_PER_PAGE + " OFFSET " + offset + ";";
+//(search, category, price, author, publisher, supplier) is a filter
 
-            console.log(sql);
+//1
+async function getTotalPage(search, sort, status) {
+  var sql = "SELECT COUNT(*) FROM hcmus_book_store.order_info ";
+  var bodyStr = await getBodyString(search, sort, status);
+  sql += bodyStr + ";";
+  console.log(sql);
+  var result = await new Promise((resolve, reject) => {
+    connection.query(sql, (err, temp) => {
+      if (err) return resolve("error");
 
-            connection.query(sql,(err, result) => {
-                if (err) return reject(err);
-                return resolve(result);
-            })
+      var item = temp[0];
+      var numOfItems = item["COUNT(*)"];
+      console.log("Number orders");
+      console.log(numOfItems);
+      var result;
 
-        });
-        */
-  } else {
-    result = await new Promise((resolve, reject) => {
-      var sql =
-        "SELECT * FROM hcmus_book_store.user_info LIMIT " +
-        LIMITED_ITEM_PER_PAGE +
-        " OFFSET " +
-        offset +
-        "";
-      connection.query(sql, (err, result) => {
-        if (err) return reject(err);
-        return resolve(result);
-      });
+      if (numOfItems % LIMITED_ITEM_PER_PAGE == 0) {
+        result = parseInt(numOfItems / LIMITED_ITEM_PER_PAGE);
+      } else {
+        result = parseInt(numOfItems / LIMITED_ITEM_PER_PAGE) + 1;
+      }
+
+      return resolve(result);
     });
-  }
-
+  });
   return result;
 }
-//yet
+
+//Get querry string
+//2
 async function getSortString(sort) {
   var result = "";
 
@@ -85,7 +78,7 @@ async function getSortString(sort) {
   return result;
 }
 
-//yet
+//3
 async function getSearchString(whereStr, search) {
   var result = "";
 
@@ -93,7 +86,7 @@ async function getSearchString(whereStr, search) {
     var result = "";
   } else {
     search = search.replace("+", " ");
-    result = " username LIKE '%" + search + "%' ";
+    result = " user_id LIKE '%" + search + "%' ";
   }
 
   if (result != "") {
@@ -107,7 +100,34 @@ async function getSearchString(whereStr, search) {
   return result;
 }
 
-//yet
+async function getPriceString(whereStr, price) {
+  var result = "";
+
+  if (price == "") {
+    var result = "";
+  } else {
+    if (price == "100000") {
+      result = "base_price <= '100000' ";
+    } else if (price == "100000-200000") {
+      result = "base_price >= '100000' AND base_price <= '200000' ";
+    } else if (price == "200000-500000") {
+      result = "base_price >= '200000' AND base_price <= '500000' ";
+    } else if (price == "500000") {
+      result = "base_price >= '500000' ";
+    }
+  }
+
+  if (result != "") {
+    if (whereStr == "") {
+      result = "WHERE " + result;
+    } else {
+      result = "AND " + result;
+    }
+  }
+
+  return result;
+}
+//4
 async function getBodyString(search, sort, status) {
   var result = "";
 
@@ -122,7 +142,6 @@ async function getBodyString(search, sort, status) {
   var searchStr = await getSearchString(whereStr, search);
   whereStr += searchStr;
 
-
   //var authorStr = await getAuthorString(whereStr, author);
   //whereStr += authorStr;
 
@@ -131,8 +150,6 @@ async function getBodyString(search, sort, status) {
 
   //var supplierStr = await getSupplierString(whereStr, supplier);
   //whereStr += supplierStr;
-  console.log('User service bodystring status');
-  console.log(status);
   if (status) {
     var status_string = "status='" + status + "' ";
     if (whereStr) {
@@ -147,12 +164,12 @@ async function getBodyString(search, sort, status) {
   console.log(result);
   return result;
 }
-
+//5
 async function getSqlString(page, search, sort, status) {
-  var sql = "SELECT * FROM hcmus_book_store.user_info ";
+  var sql = "SELECT * FROM hcmus_book_store.order_info ";
   var offset = LIMITED_ITEM_PER_PAGE * (page - 1);
 
-  var bodyStr = await getBodyString(search, sort,  status);
+  var bodyStr = await getBodyString(search, sort, status);
 
   sql += bodyStr + "LIMIT " + LIMITED_ITEM_PER_PAGE + " OFFSET " + offset + "";
 
@@ -161,48 +178,35 @@ async function getSqlString(page, search, sort, status) {
   return sql;
 }
 
-//yet
-async function getTotalPage(search, sort, status) {
-  var sql = "SELECT COUNT(*) FROM hcmus_book_store.user_info ";
-  var bodyStr = await getBodyString(search, sort, status);
-  sql += bodyStr + ";";
-  console.log('get total page');
-  console.log(status);
-  console.log(sql);
-  var result = await new Promise((resolve, reject) => {
-    connection.query(sql, (err, temp) => {
-      if (err) return resolve("error");
-
-      var item = temp[0];
-      var numOfItems = item["COUNT(*)"];
-      console.log("Number orders");
-      console.log(numOfItems);
-      var result;
-
-      if (numOfItems % LIMITED_ITEM_PER_PAGE == 0) {
-        result = parseInt(numOfItems / LIMITED_ITEM_PER_PAGE);
-      } else {
-        result = parseInt(numOfItems / LIMITED_ITEM_PER_PAGE) + 1;
+async function queryAsync(sql) {
+  return new Promise((resolve, reject) => {
+    connection.query(sql, (error, results) => {
+      if (error) {
+        reject(error);
+        return;
       }
+      resolve(results);
+      return results;
+    });
+  });
+}
 
+exports.getInvoices = async (page, search, sort, status) => {
+  var result;
+  var sql = await getSqlString(page, search, sort, status);
+
+  result = await new Promise((resolve, reject) => {
+    connection.query(sql, (err, result) => {
+      if (err) return resolve("error");
       return resolve(result);
     });
   });
-  console.log(result);
   return result;
-}
-
-exports.users = async (page, catID) => {
-  const listBooks = await getUsers(page, catID);
-  return listBooks;
 };
 
-//Yet
 exports.pageNumber = async (page, search, status) => {
   pageDetail.currentPage = page;
-  console.log('status pagenumber');
-  console.log(status);
-  var temp = await getTotalPage(search,'',status);
+  var temp = await getTotalPage(search, status);
 
   if (temp == "error") {
     pageDetail.totalPage = 1;
@@ -245,166 +249,10 @@ exports.pageNumber = async (page, search, status) => {
   return pageDetail;
 };
 
-exports.getUserByID = async (UserID) => {
-  var result = await new Promise((resolve, reject) => {
-    var sql =
-      "SELECT * FROM hcmus_book_store.user_info WHERE username = '" +
-      UserID +
-      "';";
-    connection.query(sql, (err, temp) => {
-      if (err) return reject(err);
-      var result = temp[0];
-      return resolve(result);
-    });
-  });
-  return result;
-};
-async function queryAsync(sql) {
-  return new Promise((resolve, reject) => {
-    connection.query(sql, (error, results) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      resolve(results);
-      return;
-    });
-  });
-}
-exports.blockUsers = async (listUser) => {
-  var sql = new SQL();
-  sql.Update("user_info");
-  sql.Set("status='Block'");
-  sql.Where("username " + sql.In(listUser));
-  console.log(sql.Query());
-  await queryAsync(sql.Query());
-};
-
-exports.unblockUsers = async (listUser) => {
-  console.log(listUser);
-  var sql = new SQL();
-  sql.Update("user_info");
-  sql.Set("status='Active'");
-  sql.Where("username " + sql.In(listUser));
-  console.log(sql.Query());
-  await queryAsync(sql.Query());
-};
-
-//Set status of product to Delete
-exports.deleteUsers  = async (listUser) => {
-  console.log(listUser);
-  var sql = new SQL();
-  sql.Update("user_info");
-  sql.Set("status='Delete'");
-  sql.Where("username " + sql.In(listUser));
-  console.log(sql.Query());
-  await queryAsync(sql.Query());
-};
-
-
-async function getMaxID() {
-  var sql = "SELECT MAX(id) FROM hcmus_book_store.user_info";
-  result = await queryAsync(sql);
-  return result[0]["MAX(id)"];
-}
-
-exports.addUser = async (req, res, image_url, cloudinary_id) => {
-  //var sql = "SELECT * FROM hcmus_book_store.book_info ";
-  //sql = sql + "WHERE id='" + req.body.id + "';";
-  data = req.body;
-  var role = data.role || 'user';
-  var sql =
-    "INSERT INTO hcmus_book_store.user_info (username, password, fullname, role, email, contact, avatar, cloudinary_id) VALUES ";
-  sql =
-    sql +
-    "('" +
-    data.username +
-    "', '" +
-    data.password +
-    "', '" +
-    data.fullname +
-    "', '" +
-    role +
-    "', '" +
-    data.email +
-    "', '" +
-    data.contact +
-    "', '" +
-    image_url +
-    "', '" +
-    cloudinary_id +
-    "')";
-  console.log(sql);
-  await queryAsync(sql);
-  return true;
-};
-
-exports.editProduct = async (req, res, image_url, cloudinary_id) => {
-  //var sql = "SELECT * FROM hcmus_book_store.book_info ";
-  //sql = sql + "WHERE id='" + req.body.id + "';";
-  data = req.body;
-  var sql = "UPDATE hcmus_book_store.book_info SET ";
-  sql =
-    sql +
-    "title = '" +
-    data.title +
-    "', base_price='" +
-    data.base_price +
-    "', image='" +
-    image_url +
-    "', isbn='" +
-    data.isbn +
-    "', supplier='" +
-    data.supplier;
-  sql =
-    sql +
-    "', author='" +
-    data.author +
-    "', publisher='" +
-    data.publisher +
-    "', public_year='" +
-    data.public_year +
-    "', weight='" +
-    data.weight +
-    "', size='" +
-    data.size +
-    "', number_page='" +
-    data.number_page +
-    "', page='" +
-    data.page +
-    "', description='" +
-    data.description +
-    "', description_title='" +
-    data.description_title +
-    "', cloudinary_id='" +
-    cloudinary_id +
-    "' WHERE id='" +
-    req.params.id +
-    "';";
-  console.log(sql);
-  await queryAsync(sql);
-  return true;
-};
-
-exports.getUsers = async (page, search, sort, status) => {
-  var result;
-  var sql = await getSqlString(page, search, sort, status);
-  console.log(sql);
-  result = await new Promise((resolve, reject) => {
-    connection.query(sql, (err, result) => {
-      if (err) return resolve("error");
-      return resolve(result);
-    });
-  });
-  console.log(result);
-  return result;
-};
-
 exports.getPageApi = async (page, search, sort, status) => {
   pageDetailAPI.currentPage = page;
   var temp = await getTotalPage(search, sort, status);
-  console.log('page api');
-  console.log(page);
+
   if (temp == "error") {
     pageDetailAPI.totalPage = 1;
   } else {
@@ -449,14 +297,53 @@ exports.getPageApi = async (page, search, sort, status) => {
   pageDetailAPI.search = search;
   //pageDetailAPI.category = category;
   pageDetailAPI.sort = sort;
-  pageDetailAPI.status = status;
   //pageDetailAPI.price = price;
   //pageDetailAPI.publisher = publisher;
   //pageDetailAPI.author = author;
- //pageDetailAPI.supplier = supplier;
+  //pageDetailAPI.supplier = supplier;
 
   return pageDetailAPI;
 };
+
+exports.getOrderByID = async (OrderID) => {
+  var result = await new Promise((resolve, reject) => {
+    var sql =
+      "SELECT * FROM hcmus_book_store.order_info WHERE order_id = '" +
+      OrderID +
+      "';";
+    console.log(sql);
+    connection.query(sql, (err, temp) => {
+      if (err) return reject(err);
+      var result = temp[0];
+      return resolve(result);
+    });
+  });
+  return result;
+};
+
+exports.getDetailOrderByID = async (OrderID) => {
+  var result = await new Promise((resolve, reject) => {
+    var sql =
+      "SELECT product_id, title, product_price, product_quantity,product_quantity*product_price as total FROM order_detail join book_info on order_detail.product_id=book_info.id  WHERE order_id = '" +
+      OrderID +
+      "';";
+    connection.query(sql, (err, result) => {
+      if (err) return reject(err);
+      return resolve(result);
+    });
+  });
+  return result;
+};
+
+//Set status of product to Block <=> Move product to recycle bin
+
+//Set status of product to Active
+
+//Set status of product to Delete
+
+//Add new product
+
+//Edit product, image change stay in routes/product
 
 exports.getURL = async (
   search,
@@ -592,4 +479,40 @@ exports.getPriceCode = async (price) => {
   }
 
   return code;
+};
+
+//Get all category name + id
+
+//Get list category_name of a book
+
+exports.getOrders = async (
+  page,
+  search,
+  sort,
+  status
+) => {
+  var result;
+  var sql = await getSqlString(
+    page,
+    search,
+    sort,
+    status
+  );
+
+  result = await new Promise((resolve, reject) => {
+    connection.query(sql, (err, result) => {
+      if (err) return resolve("error");
+      return resolve(result);
+    });
+  });
+  return result;
+};
+
+exports.HandleOrder  = async (listOrder,status) => {
+  var sql = new SQL();
+  sql.Update("order_info");
+  sql.Set("status='" +status + "'");
+  sql.Where("order_id " + sql.In(listOrder));
+  console.log(sql.Query());
+  await queryAsync(sql.Query());
 };

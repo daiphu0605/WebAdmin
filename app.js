@@ -14,12 +14,15 @@ require("dotenv").config({
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var productsRouter=require("./routes/products");
-
+var ordersRouter=require("./routes/orders");
+var statisicRouter=require("./routes/statistic");
 
 var signIn = require("./routes/signin");
 var signUp = require("./routes/signup");
 
 var productsAPI=require("./routes/api/products");
+var ordersAPI=require("./routes/api/orders");
+var usersAPI=require("./routes/api/users");
 
 var app = express();
 
@@ -37,14 +40,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
+app.use("/", statisicRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
+app.use("/orders", ordersRouter);
 
 app.use("/signin", signIn);
 app.use("/signUp", signUp);
 
 app.use("/api/products",productsAPI);
+app.use("/api/orders",ordersAPI);
+app.use("/api/users",usersAPI);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
