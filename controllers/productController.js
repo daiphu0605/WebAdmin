@@ -68,8 +68,10 @@ async function index(req, res, next) {
     publisher,
     supplier
   );
-  console.log("This is page number");
-  console.log(page);
+
+  /*console.log("This is page number");
+  console.log(page);*/
+
   // Get books from model
   const books = await productService.getBooks(
     page.currentPage,
@@ -82,72 +84,14 @@ async function index(req, res, next) {
     supplier
   );
 
-  //get new url
-  const categoryURL = await productService.getURL(
-    search,
-    category,
-    sort,
-    price,
-    author,
-    publisher,
-    supplier,
-    1
-  );
-
-  const defaultcategoryURL = categoryURL.substring(0, categoryURL.length - 1);
-
-  const sortURL = await productService.getURL(
-    search,
-    category,
-    sort,
-    price,
-    author,
-    publisher,
-    supplier,
-    2
-  );
-  const defaultsortURL = sortURL.substring(0, sortURL.length - 1);
-
-  const priceURL = await productService.getURL(
-    search,
-    category,
-    sort,
-    price,
-    author,
-    publisher,
-    supplier,
-    3
-  );
-  const defaultpriceURL = priceURL.substring(0, priceURL.length - 1);
-
-  /*const authorURL = await bookService.getURL(category, sort, price, author, publisher, supplier, 4);
-  const defaultauthorURL = authorURL.substring(0,authorURL.length-1);
-
-  const publisherURL = await bookService.getURL(category, sort, price, author, publisher, supplier, 5);
-  const defaultpublisherURL = publisherURL.substring(0,publisherURL.length-1);
-
-  const supplierURL = await bookService.getURL(category, sort, price, author, publisher, supplier, 6);
-  const defaultsupplierURL = supplierURL.substring(0,supplierURL.length-1);*/
-
-  const sortCode = await productService.getSortCode(sort);
-  const priceCode = await productService.getPriceCode(price);
-
   // Pass data to view to display list of books
   res.render("products/list", {
     layout: "main_layout",
     books,
     page,
     category,
-    defaultcategoryURL,
-    categoryURL,
     sort,
-    sortCode,
-    defaultsortURL,
-    sortURL,
     price,
-    priceCode,
-    defaultpriceURL,
-    priceURL,
     supplier,
     author,
     publisher,
