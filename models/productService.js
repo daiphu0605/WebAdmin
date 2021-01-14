@@ -129,6 +129,14 @@ async function getSortString(sort) {
     result = "ORDER BY base_price ASC ";
   } else if (sort == "high-low") {
     result = "ORDER BY base_price DESC ";
+  } else if (sort == "id") {
+    result = "ORDER BY id ASC ";
+  } else if (sort == "title") {
+    result = "ORDER BY title ASC ";
+  } else if (sort == "price") {
+    result = "ORDER BY base_price ASC ";
+  } else if (sort == "author") {
+    result = "ORDER BY author ASC ";
   }
 
   return result;

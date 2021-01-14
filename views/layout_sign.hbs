@@ -1,64 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html dir="ltr">
 
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Add book</title>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-    <link rel="stylesheet" type="text/css" href="./vendor/bootstrap/css/bootstrap.css">
-
-    <link rel="stylesheet" type="text/css" href="./fonts/font-awesome-4.7.0/css/font-awesome.css">
-
-    <link rel="stylesheet" type="text/css" href="./fonts/iconic/css/material-design-iconic-font.css">
-
-    <link rel="stylesheet" type="text/css" href="./vendor/animate/animate.css">
-
-    <link rel="stylesheet" type="text/css" href="./vendor/css-hamburgers/hamburgers.css">
-
-    <link rel="stylesheet" type="text/css" href="./vendor/animsition/css/animsition.css">
-
-    <link rel="stylesheet" type="text/css" href="./vendor/select2/select2.css">
-
-    <link rel="stylesheet" type="text/css" href="./vendor/daterangepicker/daterangepicker.css">
-
-    <link rel="stylesheet" type="text/css" href="./css/util.css">
-
-    <link rel="stylesheet" type="text/css" href="./css/main_sign.css">
-
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>Matrix Template - The Ultimate Multipurpose admin template</title>
+    <!-- Custom CSS -->
+    <link href="dist/css/style.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 </head>
 
 <body>
     {{{body}}}
-
-    <script type="text/javascript" async="" src="./js/analytics_002.js"></script>
-    <script type="text/javascript" async="" src="./js/analytics.js"></script>
-    <script src="./vendor/jqueryjquery-3.2.1.js"></script>
-
-    <script src="./vendor/animsition/js/animsition.js"></script>
-
-    <script src="./vendor/bootstrap/js/popper.js"></script>
-    <script src="./vendor/bootstrap/js/bootstrap.js"></script>
-
-    <script src="./vendor/select2/select2.js"></script>
-
-    <script src="./vendor/daterangepicker/moment.js"></script>
-    <script src="./vendor/daterangepicker/daterangepicker.js"></script>
-
-    <script src="./vendor/countdowntime/countdowntime.js"></script>
-
-    <script src="./js/main_sign.js"></script>
-
-    <script async="" src="./txt/js.txt"></script>
+    <!-- ============================================================== -->
+    <!-- All Required js -->
+    <!-- ============================================================== -->
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugin js -->
+    <!-- ============================================================== -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
 
-        gtag('config', 'UA-23581568-13');
+    $('[data-toggle="tooltip"]').tooltip();
+    $(".preloader").fadeOut();
+    // ============================================================== 
+    // Login and Recover Password 
+    // ============================================================== 
+    $('#to-recover').on("click", function() {
+        $("#loginform").slideUp();
+        $("#recoverform").fadeIn();
+    });
+    $('#to-login').click(function(){
+        
+        $("#recoverform").hide();
+        $("#loginform").fadeIn();
+    });
     </script>
+
 </body>
 
 </html>

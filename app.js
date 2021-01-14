@@ -5,9 +5,11 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const dotenv = require("dotenv");
 var hbs = require( 'express-handlebars' );
+var passport = require('./controllers/passport');
+var session = require('express-session');
 
 
-require("dotenv").config({
+dotenv.config({
   path: path.resolve(__dirname, "./.env"),
 });
 
@@ -18,7 +20,7 @@ var ordersRouter=require("./routes/orders");
 var statisicRouter=require("./routes/statistic");
 
 var signIn = require("./routes/signin");
-var signUp = require("./routes/signup");
+
 
 var productsAPI=require("./routes/api/products");
 var ordersAPI=require("./routes/api/orders");
@@ -34,19 +36,36 @@ var connection = require("./models/connection");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
+app.use(express.static("public"));
+app.use(session({ 
+  secret: 'anything', 
+  resave: true, 
+  saveUninitialized: true 
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(function(req, res, next){
+  res.locals.user = req.user;
+  next();
+})
+
+
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", statisicRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
 app.use("/orders", ordersRouter);
 
-app.use("/signin", signIn);
-app.use("/signUp", signUp);
+app.use("/signin?", signIn);
 
 app.use("/api/products",productsAPI);
 app.use("/api/orders",ordersAPI);
