@@ -645,11 +645,16 @@ exports.addNewProduct = async (req, res, image_url, cloudinary_id) => {
   //Add to hcmus_book_store.list_categories
   sql =
     "INSERT INTO hcmus_book_store.list_categories(id_book,id_category) VALUES ";
-  console.log(data.category);
+  
   var iduser_category;
   if (!data.category) return true;
-
-  data.category.forEach((element) => {
+  if (typeof(data.category)=='string'){
+    data_category=[data.category];
+  }else{
+    data_category=data.category;
+  }
+  
+  data_category.forEach((element) => {
     iduser_category = "('" + id + "','" + element + "'),";
     sql += iduser_category;
   });
@@ -708,7 +713,14 @@ exports.editProduct = async (req, res, image_url, cloudinary_id) => {
   sql =
     "INSERT INTO hcmus_book_store.list_categories(id_book,id_category) VALUES ";
   var idbook_category;
-  data.category.forEach((element) => {
+  
+  if (typeof(data.category)=='string'){
+    data_category=[data.category];
+  }else{
+    data_category=data.category;
+  }
+  
+  data_category.forEach((element) => {
     idbook_category = "('" + req.params.id + "','" + element + "'),";
     sql += idbook_category;
   });

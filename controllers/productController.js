@@ -326,7 +326,12 @@ exports.EditPost = async (req, res, next) => {
   cloudinary_id = detail.cloudinary_id;
 
   if (req.file) {
-    await cloudinary.uploader.destroy(detail.cloudinary_id);
+    try {
+      await cloudinary.uploader.destroy(detail.cloudinary_id);
+    }
+    catch(err) {
+    }
+    
     const result = await cloudinary.uploader.upload(req.file.path);
     const fs = require("fs");
     fs.unlinkSync(req.file.path);
