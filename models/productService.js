@@ -668,6 +668,10 @@ exports.addNewProduct = async (req, res, image_url, cloudinary_id) => {
 exports.editProduct = async (req, res, image_url, cloudinary_id) => {
   data = req.body;
   //Update hcmus_book_store.book_info
+  data.description_title = data.description_title.replace(/'/g, "");
+  data.description_title = data.description_title.replace(/"/g, "");
+  data.description = data.description.replace(/'/g, "");
+  data.description = data.description.replace(/"/g, "");
   var sql = "UPDATE hcmus_book_store.book_info SET ";
   sql =
     sql +
