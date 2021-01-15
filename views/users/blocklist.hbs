@@ -1,4 +1,4 @@
-<form id='search_form' onsubmit="replaceUsers('{{page.currentPage}}', '1', '{{search}}', '{{sort}}', '{{status}}');">
+<form id='search_form' onsubmit="replaceUsers('{{page.currentPage}}', '1', '{{search}}', '{{sort}}', 'Block');">
     <div class="input-group">
         <input type="text" class="form-control" placeholder="Search" name="search">
         <div class="input-group-append">
@@ -46,22 +46,25 @@
                                     <td>
                                         {{status}}
                                     </td>
-
+                                    
                                     <th>
                                         <label class="customcheckbox">
                                             <input type="checkbox" class="listCheckbox" name={{username}} />
                                             <span class="checkmark"></span>
                                         </label>
                                     </th>
+                                    
                                 </tr>
                                 {{/each}}
                             </tbody>
                             <!--Start product-->
                         </table>
-                        <div class="card-body " id="group_button" hidden>
-                            <input type="submit" class="btn btn-danger float-right" value="Remove">
-
+                      
+                        <div class="card-body float-right group_button" hidden id="group_button">
+                            <input type="submit" class="btn btn-success btn-group" value="Restore" name="restore">
+                            <input type="submit" class="btn btn-danger btn-group" value="Delete" name="delete">
                         </div>
+                       
                     </form>
                 </div>
 
@@ -72,20 +75,20 @@
 
 <div class="pagination" id="page">
     <button class="page-link"
-        onclick="replaceUsers('{{page.currentPage}}', '1', '{{search}}', '{{sort}}', '{{status}}');">
+        onclick="replaceUsers('{{page.currentPage}}', '1', '{{search}}', '{{sort}}', 'Block');">
         Đầu
     </button>
 
     {{#if page.prevPrevPage}}
     <button class="page-link"
-        onclick="replaceUsers('{{page.currentPage}}','{{page.prevPrevPage}}', '{{search}}', '{{sort}}',  '{{status}}');">
+        onclick="replaceUsers('{{page.currentPage}}','{{page.prevPrevPage}}', '{{search}}', '{{sort}}',  'Block');">
         {{page.prevPrevPage}}
     </button>
     {{/if}}
 
     {{#if page.prevPage}}
     <button class="page-link"
-        onclick="replaceUsers('{{page.currentPage}}','{{page.prevPage}}', '{{search}}', '{{sort}}',  '{{status}}');">
+        onclick="replaceUsers('{{page.currentPage}}','{{page.prevPage}}', '{{search}}', '{{sort}}',  'Block');">
         {{page.prevPage}}
     </button>
     {{/if}}
@@ -101,20 +104,20 @@
 
     {{#if page.nextPage}}
     <button class="page-link"
-        onclick="replaceUsers('{{page.currentPage}}','{{page.nextPage}}', '{{search}}', '{{sort}}',  '{{status}}');">
+        onclick="replaceUsers('{{page.currentPage}}','{{page.nextPage}}', '{{search}}', '{{sort}}',  'Block');">
         {{page.nextPage}}
     </button>
     {{/if}}
 
     {{#if page.nextNextPage}}
     <button class="page-link"
-        onclick="replaceUsers('{{page.currentPage}}','{{page.nextNextPage}}', '{{search}}', '{{sort}}',  '{{status}}');">
+        onclick="replaceUsers('{{page.currentPage}}','{{page.nextNextPage}}', '{{search}}', '{{sort}}',  'Block');">
         {{page.nextNextPage}}
     </button>
     {{/if}}
 
     <button class="page-link"
-        onclick="replaceUsers('{{page.currentPage}}','{{page.totalPage}}', '{{search}}',  '{{sort}}',  '{{status}}');">
+        onclick="replaceUsers('{{page.currentPage}}','{{page.totalPage}}', '{{search}}',  '{{sort}}',  'Block');">
         Cuối
     </button>
 </div>
@@ -133,13 +136,14 @@
                                     <td>
                                         \{{status}}
                                     </td>
-
+                                    
                                     <th>
                                         <label class="customcheckbox">
                                             <input type="checkbox" class="listCheckbox" name=\{{username}} />
                                             <span class="checkmark"></span>
                                         </label>
                                     </th>
+                                    
                                 </tr>
                                 \{{/each}}
                                 
@@ -212,20 +216,20 @@
 
 <script type="text/x-handlebars-template" id="page-list">
 	<button class="page-link"
-        onclick="replaceUsers('\{{this.currentPage}}', '1', '\{{this.search}}', '\{{this.sort}}', '\{{this.status}}');">
+        onclick="replaceUsers('\{{this.currentPage}}', '1', '\{{this.search}}', '\{{this.sort}}', 'Block');">
         Đầu
     </button>
 
     \{{#if this.prevPrevPage}}
     <button class="page-link"
-        onclick="replaceUsers('\{{this.currentPage}}','\{{this.prevPrevPage}}', '\{{this.search}}', '\{{this.sort}}',  '\{{this.status}}');">
+        onclick="replaceUsers('\{{this.currentPage}}','\{{this.prevPrevPage}}', '\{{this.search}}', '\{{this.sort}}',  'Block');">
         \{{this.prevPrevPage}}
     </button>
     \{{/if}}
 
     \{{#if this.prevPage}}
     <button class="page-link"
-        onclick="replaceUsers('\{{this.currentPage}}','\{{this.prevPage}}', '\{{this.search}}', '\{{this.sort}}',  '\{{this.status}}');">
+        onclick="replaceUsers('\{{this.currentPage}}','\{{this.prevPage}}', '\{{this.search}}', '\{{this.sort}}',  'Block');">
         \{{this.prevPage}}
     </button>
     \{{/if}}
@@ -241,20 +245,20 @@
 
     \{{#if this.nextPage}}
     <button class="page-link"
-        onclick="replaceUsers('\{{this.currentPage}}','\{{this.nextPage}}', '\{{this.search}}', '\{{this.sort}}',  '\{{this.status}}');">
+        onclick="replaceUsers('\{{this.currentPage}}','\{{this.nextPage}}', '\{{this.search}}', '\{{this.sort}}',  'Block');">
         \{{this.nextPage}}
     </button>
     \{{/if}}
 
     \{{#if this.nextNextPage}}
     <button class="page-link"
-        onclick="replaceUsers('\{{this.currentPage}}','\{{this.nextNextPage}}', '\{{this.search}}', '\{{this.sort}}',  '\{{this.status}}');">
+        onclick="replaceUsers('\{{this.currentPage}}','\{{this.nextNextPage}}', '\{{this.search}}', '\{{this.sort}}',  'Block');">
         \{{this.nextNextPage}}
     </button>
     \{{/if}}
 
     <button class="page-link"
-        onclick="replaceUsers('\{{this.currentPage}}','\{{this.totalPage}}', '\{{this.search}}',  '\{{this.sort}}',  '\{{this.status}}');">
+        onclick="replaceUsers('\{{this.currentPage}}','\{{this.totalPage}}', '\{{this.search}}',  '\{{this.sort}}',  'Block');">
         Cuối
     </button>
 </script>

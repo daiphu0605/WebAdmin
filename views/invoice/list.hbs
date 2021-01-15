@@ -1,4 +1,4 @@
-<form id='search_form' onsubmit="replaceUsers('{{page.currentPage}}', '1', '{{search}}', '{{sort}}', '{{status}}');">
+<form id='search_form' onsubmit="replaceOrders('{{page.currentPage}}', '1', '{{search}}', '{{sort}}', '{{status}}');">
     <div class="input-group">
         <input type="text" class="form-control" placeholder="Search" name="search">
         <div class="input-group-append">
@@ -18,9 +18,11 @@
                             <thead class="thead-light">
                                 <tr>
 
-                                    <th scope="col"><a href="">Username</a></th>
-                                    <th scope="col"><a href="">Fullname</a></th>
-                                    <th scope="col"><a href="">Role</a></th>
+                                    <th scope="col"><a href="">ID</a></th>
+                                    <th scope="col"><a href="">User</a></th>
+                                    <th scope="col"><a href="">Quantity</a></th>
+                                    <th scope="col"><a href="">Total money</a></th>
+                                    <th scope="col"><a href="">Order time</a></th>
                                     <th scope="col"><a href="">Status</a></th>
                                     <th>
                                         <label class="customcheckbox m-b-20">
@@ -32,24 +34,30 @@
                             </thead>
                             <!--Start product-->
                             <tbody class="customtable" id="products">
-                                {{#each users}}
+                                {{#each orders}}
                                 <tr>
                                     <td>
-                                        <a href="/users/{{username}}">{{username}}</a>
+                                        <a href="/orders/{{order_id}}">{{order_id}}</a>
                                     </td>
                                     <td>
-                                        {{fullname}}
+                                        {{user_id}}
+                                    </td>
+
+                                    <td>
+                                        {{quantity}}
                                     </td>
                                     <td>
-                                        {{role}}
+                                        {{total_money}}
+                                    </td>
+                                    <td>
+                                        {{order_time}}
                                     </td>
                                     <td>
                                         {{status}}
                                     </td>
-
                                     <th>
                                         <label class="customcheckbox">
-                                            <input type="checkbox" class="listCheckbox" name={{username}} />
+                                            <input type="checkbox" class="listCheckbox" name={{order_id}} />
                                             <span class="checkmark"></span>
                                         </label>
                                     </th>
@@ -58,9 +66,10 @@
                             </tbody>
                             <!--Start product-->
                         </table>
-                        <div class="card-body " id="group_button" hidden>
-                            <input type="submit" class="btn btn-danger float-right" value="Remove">
-
+                        <div class="card-body float-right group_button" hidden id="group_button">
+                            <input type="submit" class="btn btn-primary btn-group" value="Conform" name="delivery">
+                            <input type="submit" class="btn btn-success btn-group" value="Fulfill" name="fulfill">
+                            <input type="submit" class="btn btn-danger btn-group" value="Cancel" name="cancel">
                         </div>
                     </form>
                 </div>
@@ -72,20 +81,20 @@
 
 <div class="pagination" id="page">
     <button class="page-link"
-        onclick="replaceUsers('{{page.currentPage}}', '1', '{{search}}', '{{sort}}', '{{status}}');">
+        onclick="replaceOrders('{{page.currentPage}}', '1', '{{search}}', '{{sort}}', '{{status}}');">
         Đầu
     </button>
 
     {{#if page.prevPrevPage}}
     <button class="page-link"
-        onclick="replaceUsers('{{page.currentPage}}','{{page.prevPrevPage}}', '{{search}}', '{{sort}}',  '{{status}}');">
+        onclick="replaceOrders('{{page.currentPage}}','{{page.prevPrevPage}}', '{{search}}', '{{sort}}',  '{{status}}');">
         {{page.prevPrevPage}}
     </button>
     {{/if}}
 
     {{#if page.prevPage}}
     <button class="page-link"
-        onclick="replaceUsers('{{page.currentPage}}','{{page.prevPage}}', '{{search}}', '{{sort}}',  '{{status}}');">
+        onclick="replaceOrders('{{page.currentPage}}','{{page.prevPage}}', '{{search}}', '{{sort}}',  '{{status}}');">
         {{page.prevPage}}
     </button>
     {{/if}}
@@ -101,42 +110,48 @@
 
     {{#if page.nextPage}}
     <button class="page-link"
-        onclick="replaceUsers('{{page.currentPage}}','{{page.nextPage}}', '{{search}}', '{{sort}}',  '{{status}}');">
+        onclick="replaceOrders('{{page.currentPage}}','{{page.nextPage}}', '{{search}}', '{{sort}}',  '{{status}}');">
         {{page.nextPage}}
     </button>
     {{/if}}
 
     {{#if page.nextNextPage}}
     <button class="page-link"
-        onclick="replaceUsers('{{page.currentPage}}','{{page.nextNextPage}}', '{{search}}', '{{sort}}',  '{{status}}');">
+        onclick="replaceOrders('{{page.currentPage}}','{{page.nextNextPage}}', '{{search}}', '{{sort}}',  '{{status}}');">
         {{page.nextNextPage}}
     </button>
     {{/if}}
 
     <button class="page-link"
-        onclick="replaceUsers('{{page.currentPage}}','{{page.totalPage}}', '{{search}}',  '{{sort}}',  '{{status}}');">
+        onclick="replaceOrders('{{page.currentPage}}','{{page.totalPage}}', '{{search}}',  '{{sort}}',  '{{status}}');">
         Cuối
     </button>
 </div>
 <script type="text/x-handlebars-template" id="product-list">
-                                \{{#each users}}
+                                \{{#each orders}}
                                 <tr>
                                     <td>
-                                        <a href="/users/\{{username}}">\{{username}}</a>
+                                        <a href="/orders/\{{order_id}}">\{{order_id}}</a>
                                     </td>
                                     <td>
-                                        \{{fullname}}
+                                        \{{user_id}}
+                                    </td>
+                                    
+                                    <td>
+                                        \{{quantity}}
                                     </td>
                                     <td>
-                                        \{{role}}
+                                        \{{total_money}}
+                                    </td>
+                                    <td>
+                                        \{{order_time}}
                                     </td>
                                     <td>
                                         \{{status}}
                                     </td>
-
                                     <th>
                                         <label class="customcheckbox">
-                                            <input type="checkbox" class="listCheckbox" name=\{{username}} />
+                                            <input type="checkbox" class="listCheckbox" name=\{{order_id}} />
                                             <span class="checkmark"></span>
                                         </label>
                                     </th>
@@ -212,20 +227,20 @@
 
 <script type="text/x-handlebars-template" id="page-list">
 	<button class="page-link"
-        onclick="replaceUsers('\{{this.currentPage}}', '1', '\{{this.search}}', '\{{this.sort}}', '\{{this.status}}');">
+        onclick="replaceOrders('\{{this.currentPage}}', '1', '\{{this.search}}', '\{{this.sort}}', '\{{this.status}}');">
         Đầu
     </button>
 
     \{{#if this.prevPrevPage}}
     <button class="page-link"
-        onclick="replaceUsers('\{{this.currentPage}}','\{{this.prevPrevPage}}', '\{{this.search}}', '\{{this.sort}}',  '\{{this.status}}');">
+        onclick="replaceOrders('\{{this.currentPage}}','\{{this.prevPrevPage}}', '\{{this.search}}', '\{{this.sort}}',  '\{{this.status}}');">
         \{{this.prevPrevPage}}
     </button>
     \{{/if}}
 
     \{{#if this.prevPage}}
     <button class="page-link"
-        onclick="replaceUsers('\{{this.currentPage}}','\{{this.prevPage}}', '\{{this.search}}', '\{{this.sort}}',  '\{{this.status}}');">
+        onclick="replaceOrders('\{{this.currentPage}}','\{{this.prevPage}}', '\{{this.search}}', '\{{this.sort}}',  '\{{this.status}}');">
         \{{this.prevPage}}
     </button>
     \{{/if}}
@@ -241,20 +256,20 @@
 
     \{{#if this.nextPage}}
     <button class="page-link"
-        onclick="replaceUsers('\{{this.currentPage}}','\{{this.nextPage}}', '\{{this.search}}', '\{{this.sort}}',  '\{{this.status}}');">
+        onclick="replaceOrders('\{{this.currentPage}}','\{{this.nextPage}}', '\{{this.search}}', '\{{this.sort}}',  '\{{this.status}}');">
         \{{this.nextPage}}
     </button>
     \{{/if}}
 
     \{{#if this.nextNextPage}}
     <button class="page-link"
-        onclick="replaceUsers('\{{this.currentPage}}','\{{this.nextNextPage}}', '\{{this.search}}', '\{{this.sort}}',  '\{{this.status}}');">
+        onclick="replaceOrders('\{{this.currentPage}}','\{{this.nextNextPage}}', '\{{this.search}}', '\{{this.sort}}',  '\{{this.status}}');">
         \{{this.nextNextPage}}
     </button>
     \{{/if}}
 
     <button class="page-link"
-        onclick="replaceUsers('\{{this.currentPage}}','\{{this.totalPage}}', '\{{this.search}}',  '\{{this.sort}}',  '\{{this.status}}');">
+        onclick="replaceOrders('\{{this.currentPage}}','\{{this.totalPage}}', '\{{this.search}}',  '\{{this.sort}}',  '\{{this.status}}');">
         Cuối
     </button>
 </script>
@@ -276,5 +291,3 @@
     }
 
 </script>
-
-
