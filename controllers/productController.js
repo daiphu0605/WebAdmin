@@ -224,6 +224,9 @@ async function index_for_remove(req, res, next) {
 }
 
 exports.book = async (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   //const item = req.body.book_id;
   // Get detailbooks from model
   var BookID = req.params.id;
@@ -234,6 +237,9 @@ exports.book = async (req, res, next) => {
 };
 
 exports.CreateNewPage = async (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   //const item = req.body.book_id;
   // Get detailbooks from model
   var list_categories = await productService.getCategoryList();
@@ -256,6 +262,9 @@ exports.CreateNewPost = async (req, res, next) => {
 };
 
 exports.ProductRemovePage = (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   index_for_remove(req, res, next);
 };
 
@@ -272,6 +281,9 @@ exports.ProductRemovePost = async (req, res, next) => {
 };
 
 exports.EditPage = async (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   //const item = req.body.book_id;
   // Get detailbooks from model
   var BookID = req.params.id;

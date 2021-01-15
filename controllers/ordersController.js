@@ -2,10 +2,19 @@ var ordersService = require("../models/ordersService");
 
 
 exports.OrderCon = (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   index(req, res, next);//get index order by day
 };
 
 exports.OrderPending = (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   req.query.status='Pending';
   console.log(req.query.status);
   index(req, res, next);//get index order by day
@@ -17,11 +26,17 @@ exports.OrderDelivery = (req, res, next) => {
 };
 
 exports.OrderFulfill = (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   req.query.status='Fulfill';
   index(req, res, next);//get index order by day
 };
 
 exports.OrderCancel = (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   req.query.status='Cancel';
   index(req, res, next);//get index order by day
 };
@@ -43,6 +58,9 @@ exports.OrderHandleSubmit = async (req, res, next) => {
 };
 
 exports.OrderDetail = (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   index(req, res, next);//get invoice
 };
 

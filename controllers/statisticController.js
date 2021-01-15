@@ -13,6 +13,9 @@ async function queryAsync(sql) {
   });
 }
 exports.statistic = async (req, res) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   var sql =
     "SELECT * FROM hcmus_book_store.book_info order by views desc limit 10";
   var topViewBook = await queryAsync(sql);

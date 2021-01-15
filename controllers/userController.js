@@ -15,15 +15,24 @@ async function Search(req, res, next) {
 }
 
 exports.UserCon = (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   index(req, res, next);
 };
 
 exports.UserActive = (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   req.query.status = "Active";
   index(req, res, next);
 };
 
 exports.UserDel = (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   req.query.status = "Block";
   index_for_blocklist(req, res, next);
 };
@@ -169,6 +178,9 @@ exports.user = async (req, res, next) => {
 };
 
 exports.CreateNewPage = async (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   //const item = req.body.book_id;
   // Get detailbooks from model
   res.render("users/create_new", { layout: "main_layout" });
@@ -187,6 +199,9 @@ exports.CreateNewPost = async (req, res, next) => {
 };
 
 exports.user = async (req, res, next) => {
+  if (typeof req.user === "undefined"){ 
+    return res.redirect("/signin");
+  }
   var UserID = req.params.id;
 
   const detail = await userService.getUserByID(UserID);
