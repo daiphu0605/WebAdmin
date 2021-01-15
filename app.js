@@ -20,6 +20,7 @@ var ordersRouter=require("./routes/orders");
 var statisicRouter=require("./routes/statistic");
 
 var signIn = require("./routes/signin");
+var signOut = require("./routes/signout");
 
 
 var productsAPI=require("./routes/api/products");
@@ -66,6 +67,7 @@ app.use("/products", productsRouter);
 app.use("/orders", ordersRouter);
 
 app.use("/signin?", signIn);
+app.use("/signout", signOut);
 
 app.use("/api/products",productsAPI);
 app.use("/api/orders",ordersAPI);
